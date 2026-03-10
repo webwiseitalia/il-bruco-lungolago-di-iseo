@@ -46,10 +46,13 @@ export default {
           800: '#6a4d1b',
           900: '#4c3612',
         },
+        cream: '#F5F0E8',
+        ink: '#1A1A1A',
       },
       fontFamily: {
         display: ['"Playfair Display"', 'Georgia', 'serif'],
         sans: ['Inter', 'system-ui', 'sans-serif'],
+        mono: ['"Space Mono"', 'monospace'],
       },
     },
   },

@@ -1,4 +1,7 @@
-import { MapPin, Phone, Clock, Car, Train, CreditCard, Wifi, Dog, Baby, Accessibility } from 'lucide-react'
+import { useEffect, useRef } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { MapPin, Phone, Clock, Train, CreditCard, Wifi, Dog, Baby, Accessibility, Car } from 'lucide-react'
 
 const services = [
   { icon: CreditCard, label: 'Carte di credito' },
@@ -10,115 +13,130 @@ const services = [
 ]
 
 export default function Contatti() {
+  const sectionRef = useRef(null)
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const els = sectionRef.current.querySelectorAll('[data-reveal]')
+      els.forEach((el) => {
+        gsap.fromTo(el, { y: 40, opacity: 0 }, {
+          y: 0, opacity: 1, duration: 1, ease: 'power3.out',
+          scrollTrigger: { trigger: el, start: 'top 87%', toggleActions: 'play none none none' },
+        })
+      })
+
+      // Map clip-path reveal
+      const map = sectionRef.current.querySelector('[data-map]')
+      if (map) {
+        gsap.fromTo(map, { clipPath: 'inset(0 0 0 100%)' }, {
+          clipPath: 'inset(0 0 0 0%)', duration: 1.6, ease: 'expo.inOut',
+          scrollTrigger: { trigger: map, start: 'top 80%', toggleActions: 'play none none none' },
+        })
+      }
+    }, sectionRef)
+    return () => ctx.revert()
+  }, [])
+
   return (
-    <section id="contatti" className="section-padding bg-white">
-      <div className="container-custom">
-        {/* Section header */}
-        <div className="text-center mb-12 md:mb-16">
-          <span className="text-teal-500 font-medium text-sm tracking-widest uppercase">Vieni a trovarci</span>
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-navy font-bold mt-3">
-            Prenota & Contatti
+    <section ref={sectionRef} id="contatti" className="relative bg-cream overflow-hidden">
+      {/* COMPLETELY different structure: Map on top (full-bleed), info below overlapping */}
+
+      {/* Map — full bleed, tall */}
+      <div data-map className="relative h-[40vh] sm:h-[50vh] md:h-[55vh] overflow-hidden">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2788.5!2d10.0541!3d45.6608!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478177a41faa9d43%3A0x5ee8a2df79c9f402!2sIl%20Bruco!5e0!3m2!1sit!2sit!4v1700000000000!5m2!1sit!2sit"
+          width="100%"
+          height="100%"
+          style={{ border: 0, filter: 'grayscale(0.3) contrast(1.1)' }}
+          allowFullScreen=""
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          title="Mappa Il Bruco - Lungolago di Iseo"
+        />
+      </div>
+
+      {/* Content block — overlaps map with negative margin */}
+      <div className="relative z-10 -mt-16 sm:-mt-20 md:-mt-28 px-4 sm:px-8 lg:px-12 pb-16 md:pb-24">
+
+        {/* Booking CTA — wide teal block overlapping the map */}
+        <div data-reveal className="bg-teal-500 p-6 sm:p-8 md:p-12 text-white mb-10 md:mb-16 max-w-2xl">
+          <span className="font-mono text-[9px] tracking-[0.4em] uppercase text-teal-100/60 block mb-3">Vieni a trovarci</span>
+          <h2 className="font-display fluid-md text-white font-bold mb-2">
+            Prenota &<br />Contatti
           </h2>
-          <div className="w-16 h-1 bg-gold mx-auto mt-4 rounded-full" />
+          <div className="w-16 h-0.5 bg-white/30 mb-5" />
+          <p className="text-teal-100 text-sm sm:text-base mb-7 leading-relaxed max-w-md">
+            Usa il nostro sistema online per assicurarti il tavolo migliore, soprattutto nei weekend.
+          </p>
+          <div className="flex flex-col sm:flex-row items-start gap-3">
+            <a
+              href="https://booking.ilbruco.it"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative inline-block bg-white text-teal-600 px-7 py-3.5 font-semibold text-sm overflow-hidden transition-all duration-500"
+            >
+              <span className="relative z-10">Prenota Online</span>
+              <div className="absolute inset-0 bg-navy translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.77,0,0.175,1)]" />
+              <span className="absolute inset-0 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 z-20">Prenota Online</span>
+            </a>
+            <a
+              href="tel:030980784"
+              className="flex items-center gap-2 border border-white/30 text-white px-7 py-3.5 text-sm font-semibold hover:bg-white/10 transition-all duration-300"
+            >
+              <Phone className="w-4 h-4" />
+              030 980784
+            </a>
+          </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
-          {/* Info */}
-          <div className="space-y-8">
-            {/* Main CTA */}
-            <div className="bg-teal-500 rounded-2xl p-8 text-white">
-              <h3 className="font-display text-2xl font-bold mb-3">Prenota il tuo tavolo</h3>
-              <p className="text-teal-100 mb-6">
-                Usa il nostro sistema di prenotazione online per assicurarti il tavolo migliore,
-                soprattutto nei weekend e in alta stagione.
-              </p>
-              <a
-                href="https://booking.ilbruco.it"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-white text-teal-600 px-7 py-3.5 rounded-full font-semibold hover:bg-teal-50 transition-all duration-300 hover:shadow-lg"
-              >
-                Prenota Online
-              </a>
-            </div>
-
-            {/* Contact details */}
-            <div className="space-y-5">
-              <div className="flex gap-4 items-start">
-                <div className="shrink-0 w-11 h-11 bg-teal-50 rounded-xl flex items-center justify-center">
-                  <MapPin className="w-5 h-5 text-teal-500" />
-                </div>
-                <div>
-                  <div className="font-semibold text-navy">Indirizzo</div>
-                  <div className="text-gray-600 text-sm mt-0.5">Via Lungolago Marconi 20/A — 25049 Iseo (BS)</div>
-                </div>
-              </div>
-
-              <div className="flex gap-4 items-start">
-                <div className="shrink-0 w-11 h-11 bg-teal-50 rounded-xl flex items-center justify-center">
-                  <Phone className="w-5 h-5 text-teal-500" />
-                </div>
-                <div>
-                  <div className="font-semibold text-navy">Telefono & WhatsApp</div>
-                  <a href="tel:030980784" className="text-teal-600 font-medium text-sm mt-0.5 hover:underline">
-                    030 980784
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex gap-4 items-start">
-                <div className="shrink-0 w-11 h-11 bg-teal-50 rounded-xl flex items-center justify-center">
-                  <Clock className="w-5 h-5 text-teal-500" />
-                </div>
-                <div>
-                  <div className="font-semibold text-navy">Orari</div>
-                  <div className="text-gray-600 text-sm mt-0.5">
-                    Lunedì — Domenica<br />
-                    10:00 — Mezzanotte
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex gap-4 items-start">
-                <div className="shrink-0 w-11 h-11 bg-teal-50 rounded-xl flex items-center justify-center">
-                  <Train className="w-5 h-5 text-teal-500" />
-                </div>
-                <div>
-                  <div className="font-semibold text-navy">Come arrivare</div>
-                  <div className="text-gray-600 text-sm mt-0.5">
-                    Brescia ~25 min · Bergamo ~30 min · Milano ~1h15<br />
-                    Stazione FS Iseo a ~550 m
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Services */}
+        {/* Contact details — scattered horizontal layout, not a vertical list */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-10">
+          <div data-reveal className="flex gap-3 items-start">
+            <MapPin className="w-4 h-4 text-teal-500 mt-0.5 shrink-0" />
             <div>
-              <h4 className="font-semibold text-navy mb-3">Servizi</h4>
-              <div className="flex flex-wrap gap-2">
-                {services.map((s) => (
-                  <div key={s.label} className="flex items-center gap-1.5 bg-gray-50 rounded-full px-3 py-1.5 text-xs text-gray-600">
-                    <s.icon className="w-3.5 h-3.5 text-teal-500" />
-                    {s.label}
-                  </div>
-                ))}
-              </div>
+              <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-navy/35 mb-1">Indirizzo</div>
+              <div className="text-navy text-sm font-medium">Via Lungolago Marconi 20/A — 25049 Iseo (BS)</div>
             </div>
           </div>
 
-          {/* Map */}
-          <div className="rounded-2xl overflow-hidden shadow-lg h-96 lg:h-auto lg:min-h-[500px]">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2788.5!2d10.0541!3d45.6608!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478177a41faa9d43%3A0x5ee8a2df79c9f402!2sIl%20Bruco!5e0!3m2!1sit!2sit!4v1700000000000!5m2!1sit!2sit"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Mappa Il Bruco - Lungolago di Iseo"
-            />
+          <div data-reveal className="flex gap-3 items-start">
+            <Phone className="w-4 h-4 text-teal-500 mt-0.5 shrink-0" />
+            <div>
+              <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-navy/35 mb-1">Telefono & WhatsApp</div>
+              <a href="tel:030980784" className="text-teal-600 font-semibold text-sm hover:underline">030 980784</a>
+            </div>
+          </div>
+
+          <div data-reveal className="flex gap-3 items-start">
+            <Clock className="w-4 h-4 text-teal-500 mt-0.5 shrink-0" />
+            <div>
+              <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-navy/35 mb-1">Orari</div>
+              <div className="text-navy text-sm font-medium">Lunedì — Domenica<br />10:00 — Mezzanotte</div>
+            </div>
+          </div>
+
+          <div data-reveal className="flex gap-3 items-start">
+            <Train className="w-4 h-4 text-teal-500 mt-0.5 shrink-0" />
+            <div>
+              <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-navy/35 mb-1">Come arrivare</div>
+              <div className="text-navy text-sm font-medium">
+                Brescia ~25 min · Bergamo ~30 min<br />
+                <span className="text-gray-400 font-normal text-xs">Stazione FS Iseo a ~550 m</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Services — scattered tags */}
+        <div data-reveal>
+          <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-navy/25 mb-3">Servizi</div>
+          <div className="flex flex-wrap gap-2">
+            {services.map((s) => (
+              <div key={s.label} className="flex items-center gap-1.5 border border-navy/6 px-3 py-1.5 text-[9px] text-navy/40 font-mono tracking-wider">
+                <s.icon className="w-3 h-3 text-teal-500" />
+                {s.label}
+              </div>
+            ))}
           </div>
         </div>
       </div>

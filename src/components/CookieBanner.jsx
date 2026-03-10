@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Shield } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { siteData } from '../constants/siteData'
 
 const COOKIE_KEY = siteData.legal.cookieConsentKey
@@ -32,47 +33,50 @@ export default function CookieBanner() {
 
   return (
     <>
-      {/* Backdrop blur — hidden on policy pages */}
       {!isOnPolicyPage && (
         <div className="fixed inset-0 z-[998] bg-black/40 backdrop-blur-sm" />
       )}
 
-      {/* Banner */}
-      <div className="fixed bottom-0 left-0 right-0 z-[999] p-4 sm:p-6">
-        <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-2xl p-6 sm:p-8 border border-gray-200">
-          <div className="flex items-start gap-4">
-            <div className="shrink-0 w-10 h-10 bg-teal-50 rounded-full flex items-center justify-center">
-              <Shield className="w-5 h-5 text-teal-500" />
-            </div>
-            <div className="flex-1">
-              <h3 className="font-display text-lg font-bold text-navy mb-2">
-                Questo sito utilizza i cookie
-              </h3>
-              <p className="text-gray-600 text-sm leading-relaxed mb-5">
-                Utilizziamo solo cookie tecnici necessari al funzionamento del sito. Non utilizziamo cookie di profilazione
-                o tracciamento. Per maggiori informazioni, consulta la nostra{' '}
-                <Link to="/privacy-policy" className="text-teal-600 underline font-medium">Privacy Policy</Link>
-                {' '}e la{' '}
-                <Link to="/cookie-policy" className="text-teal-600 underline font-medium">Cookie Policy</Link>.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <button
-                  onClick={handleAccept}
-                  className="flex-1 py-3 px-6 bg-teal-500 hover:bg-teal-600 text-white font-semibold rounded-full transition-all duration-300 text-sm"
-                >
-                  Accetta
-                </button>
-                <button
-                  onClick={handleReject}
-                  className="flex-1 py-3 px-6 bg-teal-500 hover:bg-teal-600 text-white font-semibold rounded-full transition-all duration-300 text-sm"
-                >
-                  Rifiuta
-                </button>
+      <AnimatePresence>
+        <motion.div
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 100, opacity: 0 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="fixed bottom-0 left-0 right-0 z-[999] p-4 sm:p-6"
+        >
+          <div className="max-w-2xl mx-auto bg-white shadow-2xl p-6 sm:p-8 border border-gray-100">
+            <div className="flex items-start gap-4">
+              <Shield className="w-5 h-5 text-teal-500 mt-0.5 shrink-0" />
+              <div className="flex-1">
+                <h3 className="font-display text-lg font-bold text-navy mb-2">
+                  Questo sito utilizza i cookie
+                </h3>
+                <p className="text-gray-500 text-sm leading-relaxed mb-5">
+                  Solo cookie tecnici. Nessuna profilazione o tracciamento.{' '}
+                  <Link to="/privacy-policy" className="text-teal-600 underline">Privacy Policy</Link>
+                  {' '}&{' '}
+                  <Link to="/cookie-policy" className="text-teal-600 underline">Cookie Policy</Link>.
+                </p>
+                <div className="flex gap-3">
+                  <button
+                    onClick={handleAccept}
+                    className="flex-1 py-3 px-6 bg-teal-500 hover:bg-teal-600 text-white font-semibold text-sm transition-all duration-300"
+                  >
+                    Accetta
+                  </button>
+                  <button
+                    onClick={handleReject}
+                    className="flex-1 py-3 px-6 bg-teal-500 hover:bg-teal-600 text-white font-semibold text-sm transition-all duration-300"
+                  >
+                    Rifiuta
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </AnimatePresence>
     </>
   )
 }

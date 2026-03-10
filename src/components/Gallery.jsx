@@ -1,5 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { X, Instagram } from 'lucide-react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { AnimatePresence, motion } from 'framer-motion'
 
 import foto1 from '../assets/foto/foto-1.webp'
 import foto2 from '../assets/foto/foto-2.webp'
@@ -45,96 +48,130 @@ const filters = [
 export default function Gallery() {
   const [filter, setFilter] = useState('all')
   const [lightbox, setLightbox] = useState(null)
+  const sectionRef = useRef(null)
 
   const filtered = filter === 'all' ? images : images.filter((img) => img.category === filter)
 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const els = sectionRef.current.querySelectorAll('[data-reveal]')
+      els.forEach((el) => {
+        gsap.fromTo(el, { y: 40, opacity: 0 }, {
+          y: 0, opacity: 1, duration: 1, ease: 'power3.out',
+          scrollTrigger: { trigger: el, start: 'top 87%', toggleActions: 'play none none none' },
+        })
+      })
+    }, sectionRef)
+    return () => ctx.revert()
+  }, [])
+
   return (
-    <section id="gallery" className="section-padding bg-gray-50">
-      <div className="container-custom">
-        {/* Section header */}
-        <div className="text-center mb-12 md:mb-16">
-          <span className="text-teal-500 font-medium text-sm tracking-widest uppercase">Le nostre foto</span>
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-navy font-bold mt-3">
-            Gallery
-          </h2>
-          <div className="w-16 h-1 bg-gold mx-auto mt-4 rounded-full" />
+    <section ref={sectionRef} id="gallery" className="relative bg-navy overflow-hidden pt-20 md:pt-32 pb-16 md:pb-24">
+      {/* Header — tight left, filters pushed far right. Unique layout. */}
+      <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 md:gap-8 mb-10 md:mb-14 pl-4 sm:pl-8 lg:pl-12 pr-4 sm:pr-8 lg:pr-12">
+        <div>
+          <span data-reveal className="font-mono text-[9px] tracking-[0.4em] uppercase text-teal-300">Le nostre foto</span>
+          <h2 data-reveal className="font-display fluid-lg text-white font-bold mt-3">Gallery</h2>
+          <div data-reveal className="w-20 h-0.5 bg-gold mt-3" />
         </div>
 
-        {/* Filters */}
-        <div className="flex flex-wrap justify-center gap-2 mb-10">
+        <div data-reveal className="flex flex-wrap gap-2">
           {filters.map((f) => (
             <button
               key={f.value}
               onClick={() => setFilter(f.value)}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+              className={`font-mono text-[9px] tracking-[0.15em] uppercase px-4 py-2 transition-all duration-300 ${
                 filter === f.value
-                  ? 'bg-teal-500 text-white shadow-md'
-                  : 'bg-white text-gray-600 hover:bg-teal-50 hover:text-teal-600'
+                  ? 'bg-teal-500 text-white'
+                  : 'text-white/30 border border-white/8 hover:border-white/25 hover:text-white/60'
               }`}
             >
               {f.label}
             </button>
           ))}
         </div>
+      </div>
 
-        {/* Gallery grid */}
-        <div className="columns-2 md:columns-3 gap-3 md:gap-4 space-y-3 md:space-y-4">
-          {filtered.map((img, i) => (
-            <div
-              key={`${img.alt}-${i}`}
-              className="relative group break-inside-avoid cursor-pointer overflow-hidden rounded-xl"
+      {/* Gallery — masonry, FULL BLEED (no side padding) */}
+      <div className="columns-2 md:columns-3 lg:columns-4 gap-2 md:gap-3 space-y-2 md:space-y-3 px-2 md:px-3">
+        <AnimatePresence mode="popLayout">
+          {filtered.map((img) => (
+            <motion.div
+              key={`${img.alt}-${img.src}`}
+              layout
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="relative group break-inside-avoid cursor-pointer overflow-hidden"
               onClick={() => setLightbox(img)}
             >
               <img
                 src={img.src}
                 alt={img.alt}
-                className="w-full object-cover group-hover:scale-105 transition-transform duration-700"
+                title={img.alt}
+                width={400}
+                height={300}
                 loading="lazy"
+                className="w-full object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
               />
-              <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/30 transition-colors duration-300 flex items-center justify-center">
-                <span className="text-white text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/50 transition-colors duration-500 flex items-end p-3 sm:p-4">
+                <span className="text-white text-[10px] font-mono tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-500 translate-y-2 group-hover:translate-y-0">
                   {img.alt}
                 </span>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </AnimatePresence>
+      </div>
 
-        {/* Instagram CTA */}
-        <div className="text-center mt-12">
-          <a
-            href="https://www.instagram.com/ilbrucoiseo"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 text-white px-7 py-3.5 rounded-full font-semibold hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5"
-          >
-            <Instagram className="w-5 h-5" />
+      {/* Instagram CTA — right-aligned (different from other CTAs) */}
+      <div className="mt-12 md:mt-16 flex justify-end pr-4 sm:pr-8 lg:pr-12">
+        <a
+          href="https://www.instagram.com/ilbrucoiseo"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group flex items-center gap-3 text-white/30 hover:text-white transition-colors duration-500"
+        >
+          <Instagram className="w-5 h-5" />
+          <span className="font-mono text-[10px] tracking-wider uppercase border-b border-white/10 group-hover:border-white/40 pb-1 transition-all duration-500">
             Seguici su Instagram
-          </a>
-        </div>
+          </span>
+        </a>
       </div>
 
       {/* Lightbox */}
-      {lightbox && (
-        <div
-          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
-          onClick={() => setLightbox(null)}
-        >
-          <button
+      <AnimatePresence>
+        {lightbox && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4"
             onClick={() => setLightbox(null)}
-            className="absolute top-4 right-4 text-white/80 hover:text-white p-2"
-            aria-label="Chiudi"
           >
-            <X className="w-8 h-8" />
-          </button>
-          <img
-            src={lightbox.src}
-            alt={lightbox.alt}
-            className="max-w-full max-h-[90vh] object-contain rounded-lg"
-            onClick={(e) => e.stopPropagation()}
-          />
-        </div>
-      )}
+            <button
+              onClick={() => setLightbox(null)}
+              className="absolute top-4 right-4 text-white/50 hover:text-white p-2 transition-colors"
+              aria-label="Chiudi"
+            >
+              <X className="w-8 h-8" />
+            </button>
+            <motion.img
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              src={lightbox.src}
+              alt={lightbox.alt}
+              title={lightbox.alt}
+              className="max-w-full max-h-[90vh] object-contain"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   )
 }
