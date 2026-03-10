@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import heroMenuImg from '../assets/foto/foto-13.webp'
 import spaghettiImg from '../assets/foto/foto-5.webp'
 import fritturaImg from '../assets/foto/foto-1.webp'
 import pizzaImg from '../assets/foto/foto-3.webp'
@@ -42,20 +43,12 @@ export default function MenuSection() {
       }
 
       const items = sectionRef.current.querySelectorAll('[data-dish]')
-      items.forEach((item, i) => {
-        const directions = [
-          { x: -80, y: 60, rotation: -3 },
-          { x: 60, y: 80, rotation: 2 },
-          { x: -40, y: 100, rotation: -1 },
-          { x: 80, y: 40, rotation: 3 },
-          { x: -60, y: 70, rotation: -2 },
-        ]
-        const d = directions[i % directions.length]
+      items.forEach((item) => {
         gsap.fromTo(item,
-          { x: d.x, y: d.y, opacity: 0, rotation: d.rotation },
+          { y: 60, opacity: 0 },
           {
-            x: 0, y: 0, opacity: 1, rotation: 0, duration: 1.3, ease: 'power3.out',
-            scrollTrigger: { trigger: item, start: 'top 92%', toggleActions: 'play none none none' },
+            y: 0, opacity: 1, duration: 1, ease: 'power3.out',
+            scrollTrigger: { trigger: item, start: 'top 90%', toggleActions: 'play none none none' },
           }
         )
       })
@@ -78,9 +71,9 @@ export default function MenuSection() {
         {/* HERO DISH — full bleed with GIANT overlapping title */}
         <div data-hero-dish className="relative -mx-0 mb-0">
           <div className="relative h-[50vh] sm:h-[60vh] md:h-[75vh] overflow-hidden group">
-            <img src={dishes[0].img} alt={dishes[0].alt} title={dishes[0].title} loading="lazy" width={1400} height={700} className="w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
+            <img src={heroMenuImg} alt="La veranda del ristorante Il Bruco piena di ospiti" title="Serata al ristorante Il Bruco" loading="lazy" width={1400} height={700} className="w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-            <span className="absolute top-4 sm:top-6 left-4 sm:left-8 lg:left-12 font-mono text-[9px] tracking-[0.25em] uppercase bg-gold text-white px-3 py-1.5">{dishes[0].badge}</span>
+            <span className="absolute top-4 sm:top-6 left-4 sm:left-8 lg:left-12 font-mono text-[11px] tracking-[0.25em] uppercase bg-gold text-white px-3 py-1.5">Il Nostro Ristorante</span>
           </div>
 
           {/* GIANT title that overlaps from the bottom of the hero dish */}
@@ -95,98 +88,43 @@ export default function MenuSection() {
         {/* Description — after the giant title */}
         <div className="px-4 sm:px-8 lg:px-12 mt-8 sm:mt-12 mb-10 md:mb-16">
           <div className="flex flex-col sm:flex-row items-start justify-between gap-6 max-w-5xl">
-            <p data-reveal className="text-gray-500 text-sm sm:text-base max-w-md leading-relaxed">
+            <p data-reveal className="text-gray-500 text-base sm:text-lg max-w-md leading-relaxed">
               Specialità di pesce fresco, pizza cotta a fuoco vivo e i sapori autentici della cucina italiana.
             </p>
             <div data-reveal className="flex flex-wrap gap-2">
-              <span className="font-mono text-[9px] tracking-[0.12em] uppercase text-teal-600 bg-teal-500/10 px-4 py-2">Pesce fresco</span>
-              <span className="font-mono text-[9px] tracking-[0.12em] uppercase text-gold-700 bg-gold/10 px-4 py-2">Pizza a pellet</span>
-              <span className="font-mono text-[9px] tracking-[0.12em] uppercase text-navy/50 bg-navy/5 px-4 py-2">Franciacorta</span>
+              <span className="font-mono text-[11px] tracking-[0.12em] uppercase text-teal-600 bg-teal-500/10 px-4 py-2">Pesce fresco</span>
+              <span className="font-mono text-[11px] tracking-[0.12em] uppercase text-gold-700 bg-gold/10 px-4 py-2">Pizza a pellet</span>
+              <span className="font-mono text-[11px] tracking-[0.12em] uppercase text-navy/50 bg-navy/5 px-4 py-2">Franciacorta</span>
             </div>
           </div>
         </div>
 
-        {/* Remaining dishes — broken grid with overlapping text */}
+        {/* Dishes grid — clean 3-column layout */}
         <div className="px-4 sm:px-8 lg:px-12">
-          <div className="grid grid-cols-6 md:grid-cols-12 gap-3 md:gap-5">
-            {/* Dish 2 — with overlapping title */}
-            <div data-dish className="col-span-6 md:col-span-5 group relative overflow-visible md:mt-8">
-              <div className="relative h-[250px] sm:h-[320px] md:h-[400px] overflow-hidden">
-                <img src={dishes[1].img} alt={dishes[1].alt} title={dishes[1].title} loading="lazy" width={500} height={400} className="w-full h-full object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-              </div>
-              <div className="relative z-10 -mt-14 sm:-mt-16 pl-3 sm:pl-5">
-                <h3 className="font-display text-3xl sm:text-4xl md:text-5xl text-white font-bold leading-[0.9] mb-2 drop-shadow-lg">{dishes[1].title}</h3>
-                <p className="text-gray-500 text-xs sm:text-sm max-w-xs mt-3">{dishes[1].desc}</p>
-              </div>
-            </div>
-
-            {/* Dish 3 — taller, title bleeds over top */}
-            <div data-dish className="col-span-6 md:col-span-4 md:col-start-7 group relative overflow-visible md:-mt-8">
-              <div className="font-display text-[3rem] sm:text-[4rem] md:text-[5rem] font-bold leading-[0.85] tracking-[-0.03em] text-navy/10 mb-[-1.5rem] sm:mb-[-2rem] md:mb-[-2.5rem] relative z-10 pointer-events-none">Pizza</div>
-              <div className="relative h-[250px] sm:h-[320px] md:h-[480px] overflow-hidden">
-                <img src={dishes[2].img} alt={dishes[2].alt} title={dishes[2].title} loading="lazy" width={400} height={480} className="w-full h-full object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
-                  <h3 className="font-display text-xl text-white font-bold mb-1">{dishes[2].title}</h3>
-                  <p className="text-white/60 text-xs sm:text-sm">{dishes[2].desc}</p>
+          <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+            {dishes.slice(1).map((dish) => (
+              <div key={dish.title} data-dish className="group relative overflow-hidden w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-1rem)]">
+                <div className="relative h-[280px] sm:h-[320px] md:h-[380px] overflow-hidden">
+                  <img
+                    src={dish.img}
+                    alt={dish.alt}
+                    title={dish.title}
+                    loading="lazy"
+                    width={500}
+                    height={380}
+                    className="w-full h-full object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                  {dish.badge && (
+                    <span className="absolute top-3 left-3 font-mono text-[11px] tracking-[0.2em] uppercase bg-gold text-white px-3 py-1">{dish.badge}</span>
+                  )}
+                  <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
+                    <h3 className="font-display text-xl sm:text-2xl text-white font-bold mb-2">{dish.title}</h3>
+                    <p className="text-white/70 text-sm sm:text-base leading-relaxed">{dish.desc}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-
-            {/* Dish 4 (Paella) */}
-            <div data-dish className="col-span-6 md:col-span-3 md:col-start-12 group relative overflow-hidden md:-mt-24 hidden md:block">
-              <div className="relative h-[350px] overflow-hidden">
-                <img src={dishes[3].img} alt={dishes[3].alt} title={dishes[3].title} loading="lazy" width={300} height={350} className="w-full h-full object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                {dishes[3].badge && (
-                  <span className="absolute top-3 left-3 font-mono text-[8px] tracking-[0.2em] uppercase bg-gold text-white px-2 py-1">{dishes[3].badge}</span>
-                )}
-                <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <h3 className="font-display text-lg text-white font-bold mb-1">{dishes[3].title}</h3>
-                </div>
-              </div>
-            </div>
-
-            {/* Row 2 — wide panoramic with overlapping giant text + small */}
-            <div data-dish className="col-span-6 md:col-span-8 group relative overflow-visible mt-3 md:mt-10">
-              <div className="relative h-[200px] sm:h-[250px] md:h-[300px] overflow-hidden">
-                <img src={dishes[4].img} alt={dishes[4].alt} title={dishes[4].title} loading="lazy" width={800} height={300} className="w-full h-full object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
-              </div>
-              {/* Giant overlapping text */}
-              <div className="absolute -bottom-4 sm:-bottom-6 right-0 z-10 pointer-events-none">
-                <span className="font-display text-[4rem] sm:text-[6rem] md:text-[8rem] font-bold leading-none tracking-[-0.04em] text-cream/80">Pesce</span>
-              </div>
-              <div className="relative z-20 -mt-10 sm:-mt-12 pl-4 sm:pl-6">
-                <h3 className="font-display text-xl sm:text-2xl text-white font-bold mb-1 drop-shadow-lg">{dishes[4].title}</h3>
-                <p className="text-gray-500 text-xs sm:text-sm max-w-sm mt-2">{dishes[4].desc}</p>
-              </div>
-            </div>
-
-            <div data-dish className="col-span-6 md:col-span-4 group relative overflow-hidden mt-3 md:mt-20">
-              <div className="relative h-[200px] sm:h-[250px] md:h-[280px] overflow-hidden">
-                <img src={dishes[5].img} alt={dishes[5].alt} title={dishes[5].title} loading="lazy" width={400} height={280} className="w-full h-full object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
-                  <h3 className="font-display text-xl text-white font-bold mb-1">{dishes[5].title}</h3>
-                  <p className="text-white/60 text-xs sm:text-sm">{dishes[5].desc}</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Mobile: show Paella card */}
-            <div data-dish className="col-span-6 md:hidden group relative overflow-hidden mt-3">
-              <div className="relative h-[250px] overflow-hidden">
-                <img src={dishes[3].img} alt={dishes[3].alt} title={dishes[3].title} loading="lazy" width={400} height={250} className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                <span className="absolute top-3 left-3 font-mono text-[8px] tracking-[0.2em] uppercase bg-gold text-white px-2 py-1">{dishes[3].badge}</span>
-                <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <h3 className="font-display text-xl text-white font-bold mb-1">{dishes[3].title}</h3>
-                  <p className="text-white/60 text-xs">{dishes[3].desc}</p>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
 
@@ -196,7 +134,7 @@ export default function MenuSection() {
             href="https://booking.ilbruco.it"
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative inline-block bg-navy text-white px-8 py-4 text-sm font-semibold overflow-hidden transition-all duration-500"
+            className="group relative inline-block bg-navy text-white px-10 py-5 text-base font-semibold overflow-hidden transition-all duration-500"
           >
             <span className="relative z-10">Prenota e assaggia</span>
             <div className="absolute inset-0 bg-teal-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.77,0,0.175,1)]" />

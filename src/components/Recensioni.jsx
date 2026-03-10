@@ -75,10 +75,10 @@ export default function Recensioni() {
     <section ref={sectionRef} id="recensioni" className="relative bg-white overflow-hidden pt-20 md:pt-32 pb-16 md:pb-24">
 
       {/* GIANT overlapping section title */}
-      <div data-rece-title className="relative z-10 px-4 sm:px-8 lg:px-12 mb-12 md:mb-20">
+      <div data-rece-title className="relative z-10 px-4 sm:px-8 lg:px-12 mb-12 md:mb-20 text-center">
         <h2 className="font-display text-[14vw] sm:text-[11vw] lg:text-[8vw] font-bold leading-[0.82] tracking-[-0.04em]">
           <span className="block text-navy">Dicono</span>
-          <span className="block text-teal-500/40 ml-[8vw] sm:ml-[12vw]">di Noi</span>
+          <span className="block text-navy/40">di Noi</span>
         </h2>
       </div>
 
@@ -87,8 +87,8 @@ export default function Recensioni() {
         <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 max-w-xl">
           {badges.map((b) => (
             <div data-reveal key={b.label} className="flex items-center justify-between sm:flex-col sm:items-start gap-2 border-b sm:border-b-0 sm:border-l border-navy/8 pb-3 sm:pb-0 sm:pl-4">
-              <span className="font-mono text-[9px] tracking-[0.12em] uppercase text-navy/35">{b.label}</span>
-              <span className="text-sm font-semibold text-navy">{b.sub}</span>
+              <span className="font-mono text-[11px] tracking-[0.12em] uppercase text-navy/35">{b.label}</span>
+              <span className="text-base font-semibold text-navy">{b.sub}</span>
             </div>
           ))}
         </div>
@@ -107,12 +107,12 @@ export default function Recensioni() {
                 <Star key={j} className="w-2.5 h-2.5 fill-gold text-gold" />
               ))}
             </div>
-            <p className="text-gray-600 text-sm leading-relaxed mb-5 font-light italic">
+            <p className="text-gray-600 text-base leading-relaxed mb-5 font-light italic">
               &ldquo;{review.text}&rdquo;
             </p>
             <div className="flex items-center justify-between">
-              <span className="font-semibold text-navy text-sm">{review.author}</span>
-              <span className="font-mono text-[8px] tracking-[0.15em] uppercase text-navy/25">{review.source}</span>
+              <span className="font-semibold text-navy text-base">{review.author}</span>
+              <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-navy/25">{review.source}</span>
             </div>
           </div>
         ))}

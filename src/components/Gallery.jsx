@@ -78,10 +78,9 @@ export default function Gallery() {
 
       {/* GIANT overlapping title + filters */}
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 md:gap-8 mb-10 md:mb-14 px-4 sm:px-8 lg:px-12">
-        <div data-gallery-title>
-          <h2 className="font-display text-[14vw] sm:text-[11vw] lg:text-[8vw] font-bold leading-[0.82] tracking-[-0.04em]">
-            <span className="block text-white">Gal</span>
-            <span className="block text-teal-400/50 ml-[6vw]">lery</span>
+        <div data-gallery-title className="ml-auto text-right">
+          <h2 className="font-display text-[12vw] sm:text-[9vw] lg:text-[7vw] font-bold leading-[0.85] tracking-[-0.04em]">
+            <span className="text-white">Galleria</span>
           </h2>
         </div>
 
@@ -90,7 +89,7 @@ export default function Gallery() {
             <button
               key={f.value}
               onClick={() => setFilter(f.value)}
-              className={`font-mono text-[9px] tracking-[0.15em] uppercase px-4 py-2 transition-all duration-300 ${
+              className={`font-mono text-[11px] tracking-[0.15em] uppercase px-4 py-2 transition-all duration-300 ${
                 filter === f.value
                   ? 'bg-teal-500 text-white'
                   : 'text-white/30 border border-white/8 hover:border-white/25 hover:text-white/60'
@@ -126,7 +125,7 @@ export default function Gallery() {
                 className="w-full object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
               />
               <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/50 transition-colors duration-500 flex items-end p-3 sm:p-4">
-                <span className="text-white text-[10px] font-mono tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-500 translate-y-2 group-hover:translate-y-0">
+                <span className="text-white text-xs font-mono tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-500 translate-y-2 group-hover:translate-y-0">
                   {img.alt}
                 </span>
               </div>
@@ -144,7 +143,7 @@ export default function Gallery() {
           className="group flex items-center gap-3 text-white/30 hover:text-white transition-colors duration-500"
         >
           <Instagram className="w-5 h-5" />
-          <span className="font-mono text-[10px] tracking-wider uppercase border-b border-white/10 group-hover:border-white/40 pb-1 transition-all duration-500">
+          <span className="font-mono text-xs tracking-wider uppercase border-b border-white/10 group-hover:border-white/40 pb-1 transition-all duration-500">
             Seguici su Instagram
           </span>
         </a>

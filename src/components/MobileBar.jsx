@@ -6,7 +6,7 @@ export default function MobileBar() {
       <div className="flex">
         <a
           href="tel:030980784"
-          className="flex-1 flex items-center justify-center gap-2 py-3.5 text-navy font-mono text-xs tracking-wider uppercase hover:bg-gray-50 transition-colors"
+          className="flex-1 flex items-center justify-center gap-2 py-3.5 text-navy font-mono text-sm tracking-wider uppercase hover:bg-gray-50 transition-colors"
         >
           <Phone className="w-3.5 h-3.5" />
           Chiama
@@ -15,7 +15,7 @@ export default function MobileBar() {
           href="https://booking.ilbruco.it"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex-1 flex items-center justify-center gap-2 py-3.5 bg-teal-500 text-white font-mono text-xs tracking-wider uppercase hover:bg-teal-600 transition-colors"
+          className="flex-1 flex items-center justify-center gap-2 py-3.5 bg-teal-500 text-white font-mono text-sm tracking-wider uppercase hover:bg-teal-600 transition-colors"
         >
           <CalendarCheck className="w-3.5 h-3.5" />
           Prenota

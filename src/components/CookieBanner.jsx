@@ -52,7 +52,7 @@ export default function CookieBanner() {
                 <h3 className="font-display text-lg font-bold text-navy mb-2">
                   Questo sito utilizza i cookie
                 </h3>
-                <p className="text-gray-500 text-sm leading-relaxed mb-5">
+                <p className="text-gray-500 text-base leading-relaxed mb-5">
                   Solo cookie tecnici. Nessuna profilazione o tracciamento.{' '}
                   <Link to="/privacy-policy" className="text-teal-600 underline">Privacy Policy</Link>
                   {' '}&{' '}
@@ -61,13 +61,13 @@ export default function CookieBanner() {
                 <div className="flex gap-3">
                   <button
                     onClick={handleAccept}
-                    className="flex-1 py-3 px-6 bg-teal-500 hover:bg-teal-600 text-white font-semibold text-sm transition-all duration-300"
+                    className="flex-1 py-4 px-8 bg-teal-500 hover:bg-teal-600 text-white font-semibold text-sm transition-all duration-300"
                   >
                     Accetta
                   </button>
                   <button
                     onClick={handleReject}
-                    className="flex-1 py-3 px-6 bg-teal-500 hover:bg-teal-600 text-white font-semibold text-sm transition-all duration-300"
+                    className="flex-1 py-4 px-8 bg-teal-500 hover:bg-teal-600 text-white font-semibold text-sm transition-all duration-300"
                   >
                     Rifiuta
                   </button>

@@ -56,11 +56,20 @@ export default function Iseo() {
 
   return (
     <section ref={sectionRef} className="relative bg-cream overflow-hidden">
+
+      {/* SECTION TITLE — centered at top */}
+      <div data-iseo-title className="pt-20 md:pt-32 pb-10 md:pb-16 text-center px-4">
+        <span className="font-mono text-[11px] tracking-[0.4em] uppercase text-teal-500 block mb-4">Scopri il territorio</span>
+        <h2 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-[-0.04em] text-navy">
+          Iseo <span className="text-navy/30">&</span> il Lago
+        </h2>
+      </div>
+
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
 
-        {/* Image — RIGHT side with GIANT overlapping text */}
+        {/* Image — RIGHT side */}
         <div className="lg:col-span-7 lg:col-start-6 lg:order-2 relative">
-          <div className="relative overflow-hidden h-[45vh] sm:h-[55vh] lg:h-[90vh]">
+          <div className="relative overflow-hidden h-[45vh] sm:h-[55vh] lg:h-[75vh]">
             <img
               ref={imgRef}
               src={verandaImg}
@@ -71,29 +80,21 @@ export default function Iseo() {
               className="w-full h-[130%] object-cover will-change-transform"
               loading="lazy"
             />
-          </div>
-
-          {/* GIANT overlapping title on the image */}
-          <div data-iseo-title className="absolute bottom-0 left-0 right-0 lg:-left-[30%] z-20 pointer-events-none select-none pb-4 sm:pb-8">
-            <h2 className="font-display text-[18vw] sm:text-[14vw] lg:text-[11vw] font-bold leading-[0.82] tracking-[-0.05em]">
-              <span className="block text-white/90 drop-shadow-lg pl-4 sm:pl-8 lg:pl-0">Iseo</span>
-              <span className="block text-navy/80 text-[0.5em] ml-[10vw] sm:ml-[15vw] lg:ml-[8vw]">& il Lago</span>
-            </h2>
+            <div className="absolute inset-0 bg-gradient-to-t from-cream/30 to-transparent" />
           </div>
 
           {/* Distance tags */}
           <div data-reveal className="absolute top-4 sm:top-8 right-4 sm:right-8 z-10 flex flex-col gap-2">
-            <span className="font-mono text-[8px] tracking-[0.15em] uppercase text-white bg-navy/80 backdrop-blur-sm px-4 py-2 inline-block">Brescia ~25 min</span>
-            <span className="font-mono text-[8px] tracking-[0.15em] uppercase text-white bg-navy/80 backdrop-blur-sm px-4 py-2 inline-block">Bergamo ~30 min</span>
-            <span className="font-mono text-[8px] tracking-[0.15em] uppercase text-white bg-navy/80 backdrop-blur-sm px-4 py-2 inline-block">Milano ~1h15</span>
+            <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-white bg-navy/80 backdrop-blur-sm px-4 py-2 inline-block">Brescia ~25 min</span>
+            <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-white bg-navy/80 backdrop-blur-sm px-4 py-2 inline-block">Bergamo ~30 min</span>
+            <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-white bg-navy/80 backdrop-blur-sm px-4 py-2 inline-block">Milano ~1h15</span>
           </div>
         </div>
 
         {/* Text — LEFT side */}
         <div className="lg:col-span-5 lg:col-start-1 lg:order-1 px-5 sm:px-8 lg:pl-12 lg:pr-0 py-12 sm:py-16 lg:py-0 lg:flex lg:flex-col lg:justify-center">
           <div className="lg:pr-8 lg:py-20">
-            <span data-reveal className="font-mono text-[9px] tracking-[0.4em] uppercase text-teal-500">Scopri il territorio</span>
-            <div data-reveal className="w-20 h-0.5 bg-gold mb-8 mt-4" />
+            <div data-reveal className="w-20 h-0.5 bg-gold mb-8" />
 
             <p data-reveal className="text-base sm:text-lg leading-relaxed text-gray-600 mb-5">
               Iseo è la meta turistica principale del Lago d'Iseo, adagiata tra il lago, le colline della
@@ -109,7 +110,7 @@ export default function Iseo() {
                 <div key={a.title} data-attraction className="border border-navy/8 p-4 sm:p-5 hover:border-teal-300 transition-colors duration-500">
                   <a.icon className="w-5 h-5 text-teal-500 mb-3" />
                   <h3 className="font-semibold text-navy text-sm mb-1">{a.title}</h3>
-                  <p className="text-gray-400 text-[11px] leading-relaxed">{a.desc}</p>
+                  <p className="text-gray-400 text-xs leading-relaxed">{a.desc}</p>
                 </div>
               ))}
             </div>

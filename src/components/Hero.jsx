@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import heroImg from '../assets/foto/foto-14.webp'
+import heroImg from '../assets/foto/foto-13.webp'
 
 export default function Hero() {
   const sectionRef = useRef(null)
@@ -70,7 +70,7 @@ export default function Hero() {
       <div ref={contentRef} className="relative z-10 h-full flex flex-col justify-end">
         <div className="pb-8 sm:pb-12 lg:pb-16">
           <div data-hero-fade className="pl-4 sm:pl-8 lg:pl-12 mb-2 sm:mb-4">
-            <span className="font-mono text-[9px] sm:text-[10px] tracking-[0.4em] uppercase text-gold/90">
+            <span className="font-mono text-sm sm:text-base tracking-[0.3em] uppercase text-gold drop-shadow-lg">
               Lungolago di Iseo — Dal 1980
             </span>
           </div>
@@ -91,7 +91,7 @@ export default function Hero() {
           {/* Info row — under the giant text */}
           <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 mt-6 sm:mt-8 px-4 sm:px-8 lg:px-12">
             <div data-hero-fade>
-              <p className="text-white/40 text-xs sm:text-sm max-w-xs leading-relaxed font-light">
+              <p className="text-white/40 text-sm sm:text-base max-w-xs leading-relaxed font-light">
                 Pesce fresco, pizza a fuoco vivo e tramonti che non dimentichi.
               </p>
             </div>
@@ -100,7 +100,7 @@ export default function Hero() {
                 href="https://booking.ilbruco.it"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative bg-teal-500 text-white px-7 py-3.5 text-sm font-semibold overflow-hidden transition-all duration-500"
+                className="group relative bg-teal-500 text-white px-9 py-4 text-base font-semibold overflow-hidden transition-all duration-500"
               >
                 <span className="relative z-10">Prenota</span>
                 <div className="absolute inset-0 bg-navy translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.77,0,0.175,1)]" />
@@ -108,7 +108,7 @@ export default function Hero() {
               </a>
               <a
                 href="#menu"
-                className="text-white/40 hover:text-white text-xs font-mono tracking-wider uppercase border-b border-white/15 hover:border-white/50 pb-1 transition-all duration-500"
+                className="text-white/40 hover:text-white text-sm font-mono tracking-wider uppercase border-b border-white/15 hover:border-white/50 pb-1 transition-all duration-500"
               >
                 Menu
               </a>
@@ -119,7 +119,7 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <div data-scroll-ind className="absolute bottom-6 left-1/2 -translate-x-1/2 sm:left-auto sm:translate-x-0 sm:right-8 lg:right-14 flex flex-col items-center gap-2">
-        <span className="font-mono text-[8px] tracking-[0.3em] uppercase text-white/25 [writing-mode:vertical-lr]">Scroll</span>
+        <span className="font-mono text-[11px] tracking-[0.3em] uppercase text-white/25 [writing-mode:vertical-lr]">Scroll</span>
         <div className="w-px h-8 bg-gradient-to-b from-white/20 to-transparent" />
       </div>
     </section>

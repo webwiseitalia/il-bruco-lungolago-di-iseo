@@ -61,11 +61,11 @@ export default function Eventi() {
       <div className="relative z-10 pt-20 md:pt-32 pb-16 md:pb-24">
 
         {/* GIANT overlapping section title */}
-        <div data-events-title className="px-4 sm:px-8 lg:px-12 mb-6 md:mb-10">
-          <span data-reveal className="font-mono text-[9px] tracking-[0.4em] uppercase text-teal-300 block mb-4">Vivi l'esperienza</span>
+        <div data-events-title className="px-4 sm:px-8 lg:px-12 mb-6 md:mb-10 text-right">
+          <span data-reveal className="font-mono text-[11px] tracking-[0.4em] uppercase text-teal-300 block mb-4">Vivi l'esperienza</span>
           <h2 className="font-display text-[14vw] sm:text-[11vw] lg:text-[8vw] font-bold leading-[0.82] tracking-[-0.04em]">
             <span className="block text-white">Eventi &</span>
-            <span className="block text-teal-400/60 ml-[5vw]">Serate</span>
+            <span className="block text-navy">Serate</span>
           </h2>
         </div>
 
@@ -86,7 +86,7 @@ export default function Eventi() {
                   className="w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/30 to-transparent" />
-                <span className="absolute top-4 sm:top-6 left-4 sm:left-8 font-mono text-[9px] tracking-[0.25em] uppercase bg-gold text-white px-3 py-1.5">Signature</span>
+                <span className="absolute top-4 sm:top-6 left-4 sm:left-8 font-mono text-[11px] tracking-[0.25em] uppercase bg-gold text-white px-3 py-1.5">Signature</span>
               </div>
               {/* GIANT overlapping title */}
               <div className="relative z-10 -mt-[6vw] sm:-mt-[5vw] pl-4 sm:pl-6 pointer-events-none">
@@ -94,7 +94,7 @@ export default function Eventi() {
                   Paella &<br /><span className="text-gold/80">Sangria</span>
                 </h3>
               </div>
-              <p data-reveal className="text-white/40 text-sm max-w-lg mt-4 pl-4 sm:pl-6">
+              <p data-reveal className="text-white/40 text-base max-w-lg mt-4 pl-4 sm:pl-6">
                 Paella preparata al momento con frutti di mare freschi, sangria a volontà e musica dal vivo. Un'esperienza che sa di Mediterraneo.
               </p>
             </div>
@@ -116,7 +116,7 @@ export default function Eventi() {
               {/* Overlapping title */}
               <div className="relative z-10 -mt-8 sm:-mt-12 pl-4 sm:pl-5">
                 <h3 className="font-display text-3xl sm:text-4xl md:text-5xl text-white font-bold leading-[0.85] drop-shadow-lg">Musica<br />dal Vivo</h3>
-                <p className="text-white/40 text-xs sm:text-sm mt-3">Serate con musica live sulla veranda vista lago.</p>
+                <p className="text-white/40 text-sm sm:text-base mt-3">Serate con musica live sulla veranda vista lago.</p>
               </div>
             </div>
 
@@ -136,7 +136,7 @@ export default function Eventi() {
               </div>
               <div className="relative z-10 -mt-8 sm:-mt-10 pl-4 sm:pl-5">
                 <h3 className="font-display text-3xl sm:text-4xl text-white font-bold leading-[0.85] drop-shadow-lg">Eventi Privati</h3>
-                <p className="text-white/40 text-xs sm:text-sm mt-3">Compleanni, anniversari, cene aziendali e occasioni speciali.</p>
+                <p className="text-white/40 text-sm sm:text-base mt-3">Compleanni, anniversari, cene aziendali e occasioni speciali.</p>
               </div>
             </div>
           </div>
@@ -148,7 +148,7 @@ export default function Eventi() {
             href="https://booking.ilbruco.it"
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative bg-teal-500 text-white px-8 py-4 text-sm font-semibold overflow-hidden transition-all duration-500"
+            className="group relative bg-teal-500 text-white px-10 py-5 text-base font-semibold overflow-hidden transition-all duration-500"
           >
             <span className="relative z-10">Prenota per un evento</span>
             <div className="absolute inset-0 bg-teal-400 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.77,0,0.175,1)]" />
@@ -158,7 +158,7 @@ export default function Eventi() {
             href="https://www.instagram.com/ilbrucoiseo"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white/30 hover:text-white text-xs font-mono tracking-wider uppercase border-b border-white/10 hover:border-white/40 pb-1 transition-all duration-500"
+            className="text-white/30 hover:text-white text-sm font-mono tracking-wider uppercase border-b border-white/10 hover:border-white/40 pb-1 transition-all duration-500"
           >
             Segui gli eventi su Instagram
           </a>

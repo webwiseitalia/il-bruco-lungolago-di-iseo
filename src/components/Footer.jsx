@@ -23,7 +23,7 @@ export default function Footer() {
               Il lago ti aspetta.<br />
               <span className="text-white/60">Prenota il tuo tavolo.</span>
             </h2>
-            <p className="text-teal-100 mb-8 max-w-md text-sm sm:text-base">
+            <p className="text-teal-100 mb-8 max-w-md text-base sm:text-lg">
               La miglior vista sul Lago d'Iseo, piatti di pesce fresco e tramonti indimenticabili.
             </p>
             <div className="flex flex-col sm:flex-row items-start gap-3">
@@ -31,7 +31,7 @@ export default function Footer() {
                 href="https://booking.ilbruco.it"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative bg-white text-teal-600 px-7 py-3.5 text-sm font-bold overflow-hidden transition-all duration-500"
+                className="group relative bg-white text-teal-600 px-9 py-4 text-base font-bold overflow-hidden transition-all duration-500"
               >
                 <span className="relative z-10">Prenota Online</span>
                 <div className="absolute inset-0 bg-navy translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.77,0,0.175,1)]" />
@@ -39,7 +39,7 @@ export default function Footer() {
               </a>
               <a
                 href="tel:030980784"
-                className="flex items-center gap-2 border border-white/30 text-white px-7 py-3.5 text-sm font-semibold hover:bg-white/10 transition-all duration-300"
+                className="flex items-center gap-2 border border-white/30 text-white px-9 py-4 text-base font-semibold hover:bg-white/10 transition-all duration-300"
               >
                 <Phone className="w-4 h-4" />
                 030 980784
@@ -59,7 +59,7 @@ export default function Footer() {
           {/* Brand — wide left */}
           <div className="lg:col-span-5">
             <img src={logo} alt="Il Bruco Lungolago Iseo" title="Il Bruco — Ristorante sul Lungolago di Iseo" loading="lazy" width={64} height={64} className="h-12 mb-4 brightness-0 invert" />
-            <p className="text-gray-400 text-sm leading-relaxed max-w-xs mb-5">
+            <p className="text-gray-400 text-base leading-relaxed max-w-xs mb-5">
               Ristorante e pizzeria sul lungolago di Iseo dal 1980.
               Pesce fresco, pizza a fuoco vivo e la miglior vista sul lago.
             </p>
@@ -87,11 +87,11 @@ export default function Footer() {
 
           {/* Quick links — narrow, offset */}
           <div className="lg:col-span-2 lg:col-start-7">
-            <h4 className="font-mono text-[9px] tracking-[0.2em] uppercase text-white/25 mb-4">Navigazione</h4>
+            <h4 className="font-mono text-[11px] tracking-[0.2em] uppercase text-white/25 mb-4">Navigazione</h4>
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.href}>
-                  <a href={link.href} className="text-gray-400 text-sm hover:text-teal-300 transition-colors">
+                  <a href={link.href} className="text-gray-400 text-base hover:text-teal-300 transition-colors">
                     {link.label}
                   </a>
                 </li>
@@ -101,17 +101,17 @@ export default function Footer() {
 
           {/* Contact */}
           <div className="lg:col-span-3 lg:col-start-10">
-            <h4 className="font-mono text-[9px] tracking-[0.2em] uppercase text-white/25 mb-4">Contatti</h4>
+            <h4 className="font-mono text-[11px] tracking-[0.2em] uppercase text-white/25 mb-4">Contatti</h4>
             <ul className="space-y-3">
-              <li className="flex items-start gap-2 text-gray-400 text-sm">
+              <li className="flex items-start gap-2 text-gray-400 text-base">
                 <MapPin className="w-3 h-3 text-teal-400 mt-0.5 shrink-0" />
                 Via Lungolago Marconi 20/A<br />25049 Iseo (BS)
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="w-3 h-3 text-teal-400 shrink-0" />
-                <a href="tel:030980784" className="text-gray-400 text-sm hover:text-teal-300 transition-colors">030 980784</a>
+                <a href="tel:030980784" className="text-gray-400 text-base hover:text-teal-300 transition-colors">030 980784</a>
               </li>
-              <li className="flex items-start gap-2 text-gray-400 text-sm">
+              <li className="flex items-start gap-2 text-gray-400 text-base">
                 <Clock className="w-3 h-3 text-teal-400 mt-0.5 shrink-0" />
                 Lun — Dom<br />10:00 — Mezzanotte
               </li>
@@ -120,16 +120,16 @@ export default function Footer() {
             {/* Awards inline */}
             <div className="mt-5 space-y-2">
               <div className="border-b border-white/5 pb-2">
-                <div className="font-mono text-[8px] tracking-[0.15em] uppercase text-teal-300/50">TripAdvisor</div>
-                <div className="text-white text-xs font-semibold">Travellers' Choice 2024</div>
+                <div className="font-mono text-[11px] tracking-[0.15em] uppercase text-teal-300/50">TripAdvisor</div>
+                <div className="text-white text-sm font-semibold">Travellers' Choice 2024</div>
               </div>
               <div className="border-b border-white/5 pb-2">
-                <div className="font-mono text-[8px] tracking-[0.15em] uppercase text-teal-300/50">Google</div>
-                <div className="text-white text-xs font-semibold">4 Stelle</div>
+                <div className="font-mono text-[11px] tracking-[0.15em] uppercase text-teal-300/50">Google</div>
+                <div className="text-white text-sm font-semibold">4 Stelle</div>
               </div>
               <div>
-                <div className="font-mono text-[8px] tracking-[0.15em] uppercase text-teal-300/50">Restaurant Guru</div>
-                <div className="text-white text-xs font-semibold">Premiato</div>
+                <div className="font-mono text-[11px] tracking-[0.15em] uppercase text-teal-300/50">Restaurant Guru</div>
+                <div className="text-white text-sm font-semibold">Premiato</div>
               </div>
             </div>
           </div>
@@ -137,10 +137,10 @@ export default function Footer() {
 
         {/* Bottom bar — asymmetric */}
         <div className="border-t border-white/5 mt-12 pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-          <p className="text-gray-500 text-[10px] font-mono tracking-wider">
+          <p className="text-gray-500 text-xs font-mono tracking-wider">
             © {new Date().getFullYear()} Il Bruco — Lungolago di Iseo
           </p>
-          <div className="flex gap-5 text-[10px] text-gray-500 font-mono tracking-wider">
+          <div className="flex gap-5 text-xs text-gray-500 font-mono tracking-wider">
             <span>P.IVA: [da inserire]</span>
             <Link to="/privacy-policy" onClick={() => window.scrollTo(0, 0)} className="hover:text-teal-300 transition-colors">Privacy</Link>
             <Link to="/cookie-policy" onClick={() => window.scrollTo(0, 0)} className="hover:text-teal-300 transition-colors">Cookie</Link>

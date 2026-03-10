@@ -63,10 +63,10 @@ export default function Contatti() {
         </div>
 
         {/* GIANT overlapping title */}
-        <div data-contatti-title className="relative z-10 -mt-[8vw] sm:-mt-[7vw] lg:-mt-[6vw] px-4 sm:px-8 lg:px-12 pointer-events-none">
+        <div data-contatti-title className="relative z-10 -mt-[8vw] sm:-mt-[7vw] lg:-mt-[6vw] px-4 sm:px-8 lg:px-12 pointer-events-none text-center">
           <h2 className="font-display text-[14vw] sm:text-[11vw] lg:text-[8vw] font-bold leading-[0.82] tracking-[-0.04em]">
             <span className="block text-navy drop-shadow-lg">Contatti</span>
-            <span className="block text-teal-500/50 text-[0.5em] ml-[10vw]">& Prenota</span>
+            <span className="block text-navy/40 text-[0.5em]">& Prenota</span>
           </h2>
         </div>
       </div>
@@ -75,18 +75,18 @@ export default function Contatti() {
       <div className="relative z-10 px-4 sm:px-8 lg:px-12 pt-8 sm:pt-12 pb-16 md:pb-24">
 
         {/* Booking CTA */}
-        <div data-reveal className="bg-teal-500 p-6 sm:p-8 md:p-12 text-white mb-10 md:mb-16 max-w-2xl">
-          <span className="font-mono text-[9px] tracking-[0.4em] uppercase text-teal-100/60 block mb-3">Vieni a trovarci</span>
-          <div className="w-16 h-0.5 bg-white/30 mb-5" />
-          <p className="text-teal-100 text-sm sm:text-base mb-7 leading-relaxed max-w-md">
+        <div data-reveal className="bg-teal-500 p-6 sm:p-8 md:p-12 text-white mb-10 md:mb-16 max-w-2xl mx-auto text-center">
+          <span className="font-mono text-[11px] tracking-[0.4em] uppercase text-teal-100/60 block mb-3">Vieni a trovarci</span>
+          <div className="w-16 h-0.5 bg-white/30 mb-5 mx-auto" />
+          <p className="text-teal-100 text-base sm:text-lg mb-7 leading-relaxed max-w-md mx-auto">
             Usa il nostro sistema online per assicurarti il tavolo migliore, soprattutto nei weekend.
           </p>
-          <div className="flex flex-col sm:flex-row items-start gap-3">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <a
               href="https://booking.ilbruco.it"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative inline-block bg-white text-teal-600 px-7 py-3.5 font-semibold text-sm overflow-hidden transition-all duration-500"
+              className="group relative inline-block bg-white text-teal-600 px-9 py-4 font-semibold text-base overflow-hidden transition-all duration-500"
             >
               <span className="relative z-10">Prenota Online</span>
               <div className="absolute inset-0 bg-navy translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.77,0,0.175,1)]" />
@@ -94,7 +94,7 @@ export default function Contatti() {
             </a>
             <a
               href="tel:030980784"
-              className="flex items-center gap-2 border border-white/30 text-white px-7 py-3.5 text-sm font-semibold hover:bg-white/10 transition-all duration-300"
+              className="flex items-center gap-2 border border-white/30 text-white px-9 py-4 text-base font-semibold hover:bg-white/10 transition-all duration-300"
             >
               <Phone className="w-4 h-4" />
               030 980784
@@ -107,34 +107,34 @@ export default function Contatti() {
           <div data-reveal className="flex gap-3 items-start">
             <MapPin className="w-4 h-4 text-teal-500 mt-0.5 shrink-0" />
             <div>
-              <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-navy/35 mb-1">Indirizzo</div>
-              <div className="text-navy text-sm font-medium">Via Lungolago Marconi 20/A — 25049 Iseo (BS)</div>
+              <div className="font-mono text-[11px] tracking-[0.15em] uppercase text-navy/35 mb-1">Indirizzo</div>
+              <div className="text-navy text-base font-medium">Via Lungolago Marconi 20/A — 25049 Iseo (BS)</div>
             </div>
           </div>
 
           <div data-reveal className="flex gap-3 items-start">
             <Phone className="w-4 h-4 text-teal-500 mt-0.5 shrink-0" />
             <div>
-              <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-navy/35 mb-1">Telefono & WhatsApp</div>
-              <a href="tel:030980784" className="text-teal-600 font-semibold text-sm hover:underline">030 980784</a>
+              <div className="font-mono text-[11px] tracking-[0.15em] uppercase text-navy/35 mb-1">Telefono & WhatsApp</div>
+              <a href="tel:030980784" className="text-teal-600 font-semibold text-base hover:underline">030 980784</a>
             </div>
           </div>
 
           <div data-reveal className="flex gap-3 items-start">
             <Clock className="w-4 h-4 text-teal-500 mt-0.5 shrink-0" />
             <div>
-              <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-navy/35 mb-1">Orari</div>
-              <div className="text-navy text-sm font-medium">Lunedì — Domenica<br />10:00 — Mezzanotte</div>
+              <div className="font-mono text-[11px] tracking-[0.15em] uppercase text-navy/35 mb-1">Orari</div>
+              <div className="text-navy text-base font-medium">Lunedì — Domenica<br />10:00 — Mezzanotte</div>
             </div>
           </div>
 
           <div data-reveal className="flex gap-3 items-start">
             <Train className="w-4 h-4 text-teal-500 mt-0.5 shrink-0" />
             <div>
-              <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-navy/35 mb-1">Come arrivare</div>
-              <div className="text-navy text-sm font-medium">
+              <div className="font-mono text-[11px] tracking-[0.15em] uppercase text-navy/35 mb-1">Come arrivare</div>
+              <div className="text-navy text-base font-medium">
                 Brescia ~25 min · Bergamo ~30 min<br />
-                <span className="text-gray-400 font-normal text-xs">Stazione FS Iseo a ~550 m</span>
+                <span className="text-gray-400 font-normal text-sm">Stazione FS Iseo a ~550 m</span>
               </div>
             </div>
           </div>
@@ -142,10 +142,10 @@ export default function Contatti() {
 
         {/* Services */}
         <div data-reveal>
-          <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-navy/25 mb-3">Servizi</div>
+          <div className="font-mono text-[11px] tracking-[0.15em] uppercase text-navy/25 mb-3">Servizi</div>
           <div className="flex flex-wrap gap-2">
             {services.map((s) => (
-              <div key={s.label} className="flex items-center gap-1.5 border border-navy/6 px-3 py-1.5 text-[9px] text-navy/40 font-mono tracking-wider">
+              <div key={s.label} className="flex items-center gap-1.5 border border-navy/6 px-3 py-1.5 text-[11px] text-navy/40 font-mono tracking-wider">
                 <s.icon className="w-3 h-3 text-teal-500" />
                 {s.label}
               </div>

@@ -47,7 +47,7 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className={`text-[11px] font-mono tracking-[0.15em] uppercase transition-colors duration-300 hover:text-teal-500 ${
+              className={`text-xs font-mono tracking-[0.15em] uppercase transition-colors duration-300 hover:text-teal-500 ${
                 scrolled ? 'text-navy/70' : 'text-white/70'
               }`}
             >
@@ -59,7 +59,7 @@ export default function Navbar() {
         <div className="hidden lg:flex items-center gap-5">
           <a
             href="tel:030980784"
-            className={`flex items-center gap-1.5 text-xs font-mono tracking-wider transition-colors ${
+            className={`flex items-center gap-1.5 text-sm font-mono tracking-wider transition-colors ${
               scrolled ? 'text-navy/60 hover:text-teal-500' : 'text-white/50 hover:text-white'
             }`}
           >
@@ -70,7 +70,7 @@ export default function Navbar() {
             href="https://booking.ilbruco.it"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-teal-500 hover:bg-teal-600 text-white px-6 py-2.5 text-xs font-semibold tracking-wider uppercase transition-all duration-300"
+            className="bg-teal-500 hover:bg-teal-600 text-white px-7 py-3 text-base font-semibold tracking-wider uppercase transition-all duration-300"
           >
             Prenota
           </a>
@@ -130,7 +130,7 @@ export default function Navbar() {
                 href="https://booking.ilbruco.it"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center py-3.5 bg-teal-500 text-white font-semibold text-sm tracking-wider uppercase"
+                className="inline-flex items-center justify-center py-4 bg-teal-500 text-white font-semibold text-base tracking-wider uppercase"
               >
                 Prenota il tuo tavolo
               </a>
