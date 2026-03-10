@@ -69,7 +69,7 @@ export default function Location() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="location" className="relative bg-white overflow-hidden texture-crosshatch">
+    <section ref={sectionRef} id="location" className="relative bg-white overflow-hidden">
 
       {/* HERO — full-bleed image with GIANT overlapping title */}
       <div className="relative h-[55vh] sm:h-[65vh] md:h-[75vh] overflow-hidden">

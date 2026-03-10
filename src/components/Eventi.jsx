@@ -59,7 +59,7 @@ export default function Eventi() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="eventi" className="relative bg-navy overflow-hidden texture-circles">
+    <section ref={sectionRef} id="eventi" className="relative bg-navy overflow-hidden">
 
       <div className="relative z-10 pt-20 md:pt-32 pb-16 md:pb-24">
 

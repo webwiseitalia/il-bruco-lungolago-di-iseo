@@ -49,7 +49,7 @@ export default function Contatti() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="contatti" className="relative bg-cream overflow-hidden texture-lines">
+    <section ref={sectionRef} id="contatti" className="relative bg-cream overflow-hidden">
 
       {/* Map — full bleed with GIANT overlapping title */}
       <div className="relative">

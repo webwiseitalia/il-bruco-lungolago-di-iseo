@@ -75,7 +75,7 @@ export default function Recensioni() {
   ]
 
   return (
-    <section ref={sectionRef} id="recensioni" className="relative bg-white overflow-hidden pt-20 md:pt-32 pb-16 md:pb-24 texture-dots">
+    <section ref={sectionRef} id="recensioni" className="relative bg-white overflow-hidden pt-20 md:pt-32 pb-16 md:pb-24">
 
       {/* GIANT overlapping section title */}
       <div data-rece-title className="relative z-10 px-4 sm:px-8 lg:px-12 mb-12 md:mb-20 text-center">

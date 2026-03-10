@@ -60,7 +60,7 @@ export default function Iseo() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="relative bg-cream overflow-hidden texture-hlines">
+    <section ref={sectionRef} className="relative bg-cream overflow-hidden">
 
       {/* SECTION TITLE — centered at top */}
       <div data-iseo-title className="pt-20 md:pt-32 pb-10 md:pb-16 text-center px-4">

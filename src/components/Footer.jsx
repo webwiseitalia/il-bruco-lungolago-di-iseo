@@ -14,19 +14,19 @@ const quickLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-navy text-white overflow-hidden relative texture-circles">
-      {/* CTA Banner — teal, asymmetric with overlapping year */}
-      <div className="bg-teal-500 relative">
-        <div className="pl-4 sm:pl-8 lg:pl-12 pr-5 sm:pr-10 lg:pr-20 py-14 md:py-20">
-          <div className="max-w-3xl">
+    <footer className="bg-navy text-white overflow-hidden">
+      {/* CTA Banner — teal, centered */}
+      <div className="bg-teal-500 relative texture-teal-dots">
+        <div className="px-4 sm:px-8 lg:px-12 py-14 md:py-20 text-center">
+          <div className="max-w-2xl mx-auto">
             <h2 className="font-display fluid-md text-white font-bold mb-3">
               Il lago ti aspetta.<br />
               <span className="text-white/60">Prenota il tuo tavolo.</span>
             </h2>
-            <p className="text-teal-100 mb-8 max-w-md text-base sm:text-lg">
+            <p className="text-teal-100 mb-8 max-w-md mx-auto text-base sm:text-lg">
               La miglior vista sul Lago d'Iseo, piatti di pesce fresco e tramonti indimenticabili.
             </p>
-            <div className="flex flex-col sm:flex-row items-start gap-3">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
               <a
                 href="https://booking.ilbruco.it"
                 target="_blank"
