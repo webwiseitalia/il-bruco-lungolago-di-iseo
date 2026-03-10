@@ -23,40 +23,45 @@ export default function MenuSection() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Hero dish — cinematic zoom-out reveal
       const heroDish = sectionRef.current.querySelector('[data-hero-dish]')
       if (heroDish) {
         gsap.fromTo(heroDish,
-          { clipPath: 'inset(15% 15% 15% 15%)' },
+          { clipPath: 'inset(20% 20% 20% 20%)', scale: 1.15 },
           {
-            clipPath: 'inset(0% 0% 0% 0%)', duration: 1.6, ease: 'expo.inOut',
+            clipPath: 'inset(0% 0% 0% 0%)', scale: 1, duration: 2, ease: 'expo.inOut',
             scrollTrigger: { trigger: heroDish, start: 'top 80%', toggleActions: 'play none none none' },
           }
         )
       }
 
+      // Big title with skew animation
       const bigTitle = sectionRef.current.querySelector('[data-big-title]')
       if (bigTitle) {
-        gsap.fromTo(bigTitle, { y: 80, opacity: 0 }, {
-          y: 0, opacity: 1, duration: 1.4, ease: 'expo.out',
+        gsap.fromTo(bigTitle, { y: 120, opacity: 0, skewY: 4 }, {
+          y: 0, opacity: 1, skewY: 0, duration: 1.6, ease: 'expo.out',
           scrollTrigger: { trigger: bigTitle, start: 'top 92%', toggleActions: 'play none none none' },
         })
       }
 
+      // Dish cards — staggered scale + fade with alternating directions
       const items = sectionRef.current.querySelectorAll('[data-dish]')
-      items.forEach((item) => {
+      items.forEach((item, i) => {
         gsap.fromTo(item,
-          { y: 60, opacity: 0 },
+          { y: 80, opacity: 0, scale: 0.92, rotateY: i % 2 === 0 ? -5 : 5 },
           {
-            y: 0, opacity: 1, duration: 1, ease: 'power3.out',
+            y: 0, opacity: 1, scale: 1, rotateY: 0, duration: 1.2, ease: 'power3.out',
             scrollTrigger: { trigger: item, start: 'top 90%', toggleActions: 'play none none none' },
+            delay: i * 0.08,
           }
         )
       })
 
+      // Reveal elements with blur
       const els = sectionRef.current.querySelectorAll('[data-reveal]')
       els.forEach((el) => {
-        gsap.fromTo(el, { y: 50, opacity: 0 }, {
-          y: 0, opacity: 1, duration: 1, ease: 'power3.out',
+        gsap.fromTo(el, { y: 50, opacity: 0, filter: 'blur(6px)' }, {
+          y: 0, opacity: 1, filter: 'blur(0px)', duration: 1.1, ease: 'power3.out',
           scrollTrigger: { trigger: el, start: 'top 87%', toggleActions: 'play none none none' },
         })
       })
@@ -65,7 +70,7 @@ export default function MenuSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="menu" className="relative bg-cream overflow-hidden">
+    <section ref={sectionRef} id="menu" className="relative bg-cream overflow-hidden texture-lines">
       <div className="relative z-10 pt-20 md:pt-32 pb-16 md:pb-24">
 
         {/* HERO DISH — full bleed with GIANT overlapping title */}

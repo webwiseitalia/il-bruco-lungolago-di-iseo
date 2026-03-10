@@ -10,44 +10,47 @@ export default function Eventi() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Title with skew
       const bigTitle = sectionRef.current.querySelector('[data-events-title]')
       if (bigTitle) {
-        gsap.fromTo(bigTitle, { y: 120, opacity: 0 }, {
-          y: 0, opacity: 1, duration: 1.6, ease: 'expo.out',
+        gsap.fromTo(bigTitle, { y: 150, opacity: 0, skewY: -4 }, {
+          y: 0, opacity: 1, skewY: 0, duration: 1.8, ease: 'expo.out',
           scrollTrigger: { trigger: bigTitle, start: 'top 95%', toggleActions: 'play none none none' },
         })
       }
 
+      // Event cards — cinematic entrances with clip-path and scale
       const card1 = sectionRef.current.querySelector('[data-event-1]')
       const card2 = sectionRef.current.querySelector('[data-event-2]')
       const card3 = sectionRef.current.querySelector('[data-event-3]')
 
       if (card1) {
         gsap.fromTo(card1,
-          { y: 120, opacity: 0 },
-          { y: 0, opacity: 1, duration: 1.4, ease: 'power3.out',
+          { y: 150, opacity: 0, clipPath: 'inset(10% 10% 10% 10%)' },
+          { y: 0, opacity: 1, clipPath: 'inset(0% 0% 0% 0%)', duration: 1.6, ease: 'expo.out',
             scrollTrigger: { trigger: card1, start: 'top 90%', toggleActions: 'play none none none' } }
         )
       }
       if (card2) {
         gsap.fromTo(card2,
-          { x: 80, y: 60, opacity: 0, rotation: 2 },
-          { x: 0, y: 0, opacity: 1, rotation: 0, duration: 1.3, ease: 'power3.out',
+          { x: 100, y: 60, opacity: 0, scale: 0.9, rotation: 3 },
+          { x: 0, y: 0, opacity: 1, scale: 1, rotation: 0, duration: 1.4, ease: 'power3.out',
             scrollTrigger: { trigger: card2, start: 'top 92%', toggleActions: 'play none none none' } }
         )
       }
       if (card3) {
         gsap.fromTo(card3,
-          { x: -60, y: 80, opacity: 0, rotation: -1.5 },
-          { x: 0, y: 0, opacity: 1, rotation: 0, duration: 1.3, ease: 'power3.out',
+          { x: -80, y: 80, opacity: 0, scale: 0.9, rotation: -2 },
+          { x: 0, y: 0, opacity: 1, scale: 1, rotation: 0, duration: 1.4, ease: 'power3.out',
             scrollTrigger: { trigger: card3, start: 'top 92%', toggleActions: 'play none none none' } }
         )
       }
 
+      // Reveal with blur
       const els = sectionRef.current.querySelectorAll('[data-reveal]')
       els.forEach((el) => {
-        gsap.fromTo(el, { y: 40, opacity: 0 }, {
-          y: 0, opacity: 1, duration: 1, ease: 'power3.out',
+        gsap.fromTo(el, { y: 40, opacity: 0, filter: 'blur(6px)' }, {
+          y: 0, opacity: 1, filter: 'blur(0px)', duration: 1.1, ease: 'power3.out',
           scrollTrigger: { trigger: el, start: 'top 87%', toggleActions: 'play none none none' },
         })
       })
@@ -56,7 +59,7 @@ export default function Eventi() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="eventi" className="relative bg-navy overflow-hidden">
+    <section ref={sectionRef} id="eventi" className="relative bg-navy overflow-hidden texture-circles">
 
       <div className="relative z-10 pt-20 md:pt-32 pb-16 md:pb-24">
 

@@ -10,8 +10,10 @@ export default function Hero() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Parallax on scroll
       gsap.to(imgRef.current, {
         yPercent: 25,
+        scale: 1.1,
         ease: 'none',
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -21,28 +23,50 @@ export default function Hero() {
         },
       })
 
-      const tl = gsap.timeline({ delay: 0.3 })
-      tl.fromTo(imgRef.current, { scale: 1.4 }, { scale: 1, duration: 2.5, ease: 'power3.out' })
+      // Content fades out on scroll
+      gsap.to(contentRef.current, {
+        opacity: 0,
+        y: -80,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: '60% top',
+          end: 'bottom top',
+          scrub: 0.4,
+        },
+      })
 
+      // Intro timeline
+      const tl = gsap.timeline({ delay: 0.2 })
+
+      // Cinematic image reveal
+      tl.fromTo(imgRef.current, { scale: 1.6, filter: 'brightness(0.3)' }, { scale: 1, filter: 'brightness(1)', duration: 3, ease: 'expo.out' })
+
+      // Headline — dramatic letter reveal
       const headlineEls = contentRef.current?.querySelectorAll('[data-hero-line]') || []
       tl.fromTo(
         headlineEls,
-        { y: 150, opacity: 0, rotationX: 50 },
-        { y: 0, opacity: 1, rotationX: 0, duration: 1.6, ease: 'expo.out', stagger: 0.12 },
-        0.4
+        { y: 200, opacity: 0, rotationX: 60, skewX: -5 },
+        { y: 0, opacity: 1, rotationX: 0, skewX: 0, duration: 1.8, ease: 'expo.out', stagger: 0.15 },
+        0.5
       )
 
+      // Subtitle elements with stagger
       const subtleEls = contentRef.current?.querySelectorAll('[data-hero-fade]') || []
       tl.fromTo(
         subtleEls,
-        { y: 60, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, ease: 'power3.out', stagger: 0.1 },
-        1.4
+        { y: 80, opacity: 0, filter: 'blur(10px)' },
+        { y: 0, opacity: 1, filter: 'blur(0px)', duration: 1.2, ease: 'power3.out', stagger: 0.12 },
+        1.6
       )
 
+      // Scroll indicator with bounce
       const scrollInd = sectionRef.current.querySelector('[data-scroll-ind]')
       if (scrollInd) {
-        tl.fromTo(scrollInd, { opacity: 0 }, { opacity: 1, duration: 1, ease: 'power2.out' }, 2.2)
+        tl.fromTo(scrollInd, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 1, ease: 'power2.out' }, 2.4)
+        gsap.to(scrollInd, {
+          y: 8, duration: 1.5, ease: 'sine.inOut', repeat: -1, yoyo: true, delay: 3.5,
+        })
       }
     }, sectionRef)
 

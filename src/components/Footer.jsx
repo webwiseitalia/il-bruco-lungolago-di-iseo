@@ -14,7 +14,7 @@ const quickLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-navy text-white overflow-hidden">
+    <footer className="bg-navy text-white overflow-hidden relative texture-circles">
       {/* CTA Banner — teal, asymmetric with overlapping year */}
       <div className="bg-teal-500 relative">
         <div className="pl-4 sm:pl-8 lg:pl-12 pr-5 sm:pr-10 lg:pr-20 py-14 md:py-20">

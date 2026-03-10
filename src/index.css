@@ -134,6 +134,94 @@ html.lenis, html.lenis body {
   clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
 }
 
+/* =============================================
+   SECTION TEXTURE OVERLAYS
+   ============================================= */
+
+/* Dot grid — for white sections */
+.texture-dots::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(5, 128, 125, 0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Diagonal lines — for cream sections */
+.texture-lines::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 18px,
+    rgba(10, 36, 99, 0.025) 18px,
+    rgba(10, 36, 99, 0.025) 19px
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Cross-hatch — for white sections (alternate) */
+.texture-crosshatch::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(10, 36, 99, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(10, 36, 99, 0.018) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Subtle circles — for dark navy sections */
+.texture-circles::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.03) 1.5px, transparent 1.5px);
+  background-size: 32px 32px;
+  background-position: 16px 16px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Horizontal fine lines — for cream sections (alternate) */
+.texture-hlines::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 24px,
+    rgba(10, 36, 99, 0.02) 24px,
+    rgba(10, 36, 99, 0.02) 25px
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Diamond grid — for dark sections (alternate) */
+.texture-diamonds::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(45deg, rgba(255, 255, 255, 0.02) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(255, 255, 255, 0.02) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.02) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.02) 75%);
+  background-size: 36px 36px;
+  background-position: 0 0, 0 18px, 18px -18px, -18px 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
 /* Stagger children animation helper */
 .stagger-children > * {
   opacity: 0;

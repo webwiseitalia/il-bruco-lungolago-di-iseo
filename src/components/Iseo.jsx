@@ -17,36 +17,41 @@ export default function Iseo() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Image parallax with zoom
       gsap.to(imgRef.current, {
         yPercent: -15,
+        scale: 1.08,
         ease: 'none',
         scrollTrigger: { trigger: imgRef.current?.parentElement, start: 'top bottom', end: 'bottom top', scrub: 0.6 },
       })
 
+      // Title — scale up from center
       const bigTitle = sectionRef.current.querySelector('[data-iseo-title]')
       if (bigTitle) {
-        gsap.fromTo(bigTitle, { y: 100, opacity: 0 }, {
-          y: 0, opacity: 1, duration: 1.4, ease: 'expo.out',
+        gsap.fromTo(bigTitle, { y: 80, opacity: 0, scale: 0.9 }, {
+          y: 0, opacity: 1, scale: 1, duration: 1.6, ease: 'expo.out',
           scrollTrigger: { trigger: bigTitle, start: 'top 92%', toggleActions: 'play none none none' },
         })
       }
 
+      // Reveal elements with blur
       const els = sectionRef.current.querySelectorAll('[data-reveal]')
       els.forEach((el) => {
-        gsap.fromTo(el, { y: 50, opacity: 0 }, {
-          y: 0, opacity: 1, duration: 1, ease: 'power3.out',
+        gsap.fromTo(el, { y: 50, opacity: 0, filter: 'blur(6px)' }, {
+          y: 0, opacity: 1, filter: 'blur(0px)', duration: 1.1, ease: 'power3.out',
           scrollTrigger: { trigger: el, start: 'top 87%', toggleActions: 'play none none none' },
         })
       })
 
+      // Attraction cards — staggered with scale bounce
       const items = sectionRef.current.querySelectorAll('[data-attraction]')
       items.forEach((item, i) => {
         gsap.fromTo(item,
-          { x: 60, opacity: 0 },
+          { y: 60, x: 40, opacity: 0, scale: 0.9 },
           {
-            x: 0, opacity: 1, duration: 0.9, ease: 'power3.out',
+            y: 0, x: 0, opacity: 1, scale: 1, duration: 1, ease: 'back.out(1.2)',
             scrollTrigger: { trigger: item, start: 'top 90%', toggleActions: 'play none none none' },
-            delay: i * 0.08,
+            delay: i * 0.1,
           }
         )
       })
@@ -55,7 +60,7 @@ export default function Iseo() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="relative bg-cream overflow-hidden">
+    <section ref={sectionRef} className="relative bg-cream overflow-hidden texture-hlines">
 
       {/* SECTION TITLE — centered at top */}
       <div data-iseo-title className="pt-20 md:pt-32 pb-10 md:pb-16 text-center px-4">

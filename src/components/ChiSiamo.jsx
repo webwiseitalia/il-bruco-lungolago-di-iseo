@@ -9,42 +9,47 @@ export default function ChiSiamo() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Parallax on image
       gsap.to(imgRef.current, {
         yPercent: -18,
         ease: 'none',
         scrollTrigger: { trigger: sectionRef.current, start: 'top bottom', end: 'bottom top', scrub: 0.8 },
       })
 
+      // Cinematic clip-path reveal
       const imgWrap = sectionRef.current.querySelector('[data-img-reveal]')
       if (imgWrap) {
-        gsap.fromTo(imgWrap, { clipPath: 'inset(0 100% 0 0)' }, {
-          clipPath: 'inset(0 0% 0 0)', duration: 1.8, ease: 'expo.inOut',
+        gsap.fromTo(imgWrap, { clipPath: 'inset(0 100% 0 0)', scale: 1.1 }, {
+          clipPath: 'inset(0 0% 0 0)', scale: 1, duration: 2, ease: 'expo.inOut',
           scrollTrigger: { trigger: imgWrap, start: 'top 80%', toggleActions: 'play none none none' },
         })
       }
 
+      // Giant title with dramatic entrance
       const bigText = sectionRef.current.querySelector('[data-big-text]')
       if (bigText) {
-        gsap.fromTo(bigText, { y: 100, opacity: 0 }, {
-          y: 0, opacity: 1, duration: 1.4, ease: 'expo.out',
+        gsap.fromTo(bigText, { y: 150, opacity: 0, skewY: 5 }, {
+          y: 0, opacity: 1, skewY: 0, duration: 1.6, ease: 'expo.out',
           scrollTrigger: { trigger: bigText, start: 'top 90%', toggleActions: 'play none none none' },
         })
       }
 
+      // Text reveals with blur effect
       const els = sectionRef.current.querySelectorAll('[data-reveal]')
       els.forEach((el, i) => {
-        gsap.fromTo(el, { y: 70, opacity: 0 }, {
-          y: 0, opacity: 1, duration: 1.1, ease: 'power3.out',
+        gsap.fromTo(el, { y: 70, opacity: 0, filter: 'blur(8px)' }, {
+          y: 0, opacity: 1, filter: 'blur(0px)', duration: 1.2, ease: 'power3.out',
           scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' },
-          delay: i * 0.05,
+          delay: i * 0.06,
         })
       })
 
+      // Badge — scale + rotation entrance
       const badge = sectionRef.current.querySelector('[data-badge]')
       if (badge) {
-        gsap.fromTo(badge, { x: 80, opacity: 0, rotation: 3 }, {
-          x: 0, opacity: 1, rotation: 0, duration: 1.2, ease: 'power3.out',
-          scrollTrigger: { trigger: badge, start: 'top 90%', toggleActions: 'play none none none' },
+        gsap.fromTo(badge, { scale: 0.5, opacity: 0, rotation: 10 }, {
+          scale: 1, opacity: 1, rotation: 0, duration: 1.4, ease: 'back.out(1.5)',
+          scrollTrigger: { trigger: badge, start: 'top 85%', toggleActions: 'play none none none' },
         })
       }
     }, sectionRef)
@@ -52,7 +57,7 @@ export default function ChiSiamo() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="chi-siamo" className="relative overflow-hidden bg-white">
+    <section ref={sectionRef} id="chi-siamo" className="relative overflow-hidden bg-white texture-dots">
       <div className="pt-12 md:pt-0 pb-20 md:pb-32">
 
         {/* Giant overlapping section title */}

@@ -23,37 +23,40 @@ export default function Recensioni() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Title — scale from center
       const bigTitle = sectionRef.current.querySelector('[data-rece-title]')
       if (bigTitle) {
-        gsap.fromTo(bigTitle, { y: 100, opacity: 0 }, {
-          y: 0, opacity: 1, duration: 1.4, ease: 'expo.out',
+        gsap.fromTo(bigTitle, { y: 100, opacity: 0, scale: 0.85 }, {
+          y: 0, opacity: 1, scale: 1, duration: 1.6, ease: 'expo.out',
           scrollTrigger: { trigger: bigTitle, start: 'top 92%', toggleActions: 'play none none none' },
         })
       }
 
+      // Reveals with blur
       const els = sectionRef.current.querySelectorAll('[data-reveal]')
       els.forEach((el) => {
-        gsap.fromTo(el, { y: 40, opacity: 0 }, {
-          y: 0, opacity: 1, duration: 1, ease: 'power3.out',
+        gsap.fromTo(el, { y: 40, opacity: 0, filter: 'blur(6px)' }, {
+          y: 0, opacity: 1, filter: 'blur(0px)', duration: 1.1, ease: 'power3.out',
           scrollTrigger: { trigger: el, start: 'top 87%', toggleActions: 'play none none none' },
         })
       })
 
+      // Review cards — scattered entrance with scale + rotation + blur
       const cards = sectionRef.current.querySelectorAll('[data-review]')
       cards.forEach((card, i) => {
         const entrances = [
-          { y: 80, x: -30, rotation: -2 },
-          { y: 100, x: 40, rotation: 1.5 },
-          { y: 60, x: -20, rotation: -1 },
-          { y: 90, x: 30, rotation: 2 },
-          { y: 70, x: -40, rotation: -1.5 },
-          { y: 110, x: 20, rotation: 1 },
+          { y: 100, x: -40, rotation: -3, scale: 0.85 },
+          { y: 120, x: 50, rotation: 2, scale: 0.88 },
+          { y: 80, x: -30, rotation: -1.5, scale: 0.9 },
+          { y: 110, x: 40, rotation: 2.5, scale: 0.85 },
+          { y: 90, x: -50, rotation: -2, scale: 0.88 },
+          { y: 130, x: 30, rotation: 1.5, scale: 0.9 },
         ]
         const e = entrances[i % entrances.length]
         gsap.fromTo(card,
-          { y: e.y, x: e.x, opacity: 0, rotation: e.rotation },
+          { y: e.y, x: e.x, opacity: 0, rotation: e.rotation, scale: e.scale, filter: 'blur(5px)' },
           {
-            y: 0, x: 0, opacity: 1, rotation: 0, duration: 1.2, ease: 'power3.out',
+            y: 0, x: 0, opacity: 1, rotation: 0, scale: 1, filter: 'blur(0px)', duration: 1.4, ease: 'power3.out',
             scrollTrigger: { trigger: card, start: 'top 92%', toggleActions: 'play none none none' },
           }
         )
@@ -72,7 +75,7 @@ export default function Recensioni() {
   ]
 
   return (
-    <section ref={sectionRef} id="recensioni" className="relative bg-white overflow-hidden pt-20 md:pt-32 pb-16 md:pb-24">
+    <section ref={sectionRef} id="recensioni" className="relative bg-white overflow-hidden pt-20 md:pt-32 pb-16 md:pb-24 texture-dots">
 
       {/* GIANT overlapping section title */}
       <div data-rece-title className="relative z-10 px-4 sm:px-8 lg:px-12 mb-12 md:mb-20 text-center">

@@ -17,26 +17,30 @@ export default function Contatti() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Reveals with blur
       const els = sectionRef.current.querySelectorAll('[data-reveal]')
-      els.forEach((el) => {
-        gsap.fromTo(el, { y: 40, opacity: 0 }, {
-          y: 0, opacity: 1, duration: 1, ease: 'power3.out',
+      els.forEach((el, i) => {
+        gsap.fromTo(el, { y: 50, opacity: 0, filter: 'blur(6px)' }, {
+          y: 0, opacity: 1, filter: 'blur(0px)', duration: 1.1, ease: 'power3.out',
           scrollTrigger: { trigger: el, start: 'top 87%', toggleActions: 'play none none none' },
+          delay: i * 0.05,
         })
       })
 
+      // Map — cinematic clip-path reveal with scale
       const map = sectionRef.current.querySelector('[data-map]')
       if (map) {
-        gsap.fromTo(map, { clipPath: 'inset(0 0 0 100%)' }, {
-          clipPath: 'inset(0 0 0 0%)', duration: 1.6, ease: 'expo.inOut',
+        gsap.fromTo(map, { clipPath: 'inset(0 0 0 100%)', scale: 1.05 }, {
+          clipPath: 'inset(0 0 0 0%)', scale: 1, duration: 2, ease: 'expo.inOut',
           scrollTrigger: { trigger: map, start: 'top 80%', toggleActions: 'play none none none' },
         })
       }
 
+      // Title — scale from center
       const bigTitle = sectionRef.current.querySelector('[data-contatti-title]')
       if (bigTitle) {
-        gsap.fromTo(bigTitle, { y: 80, opacity: 0 }, {
-          y: 0, opacity: 1, duration: 1.4, ease: 'expo.out',
+        gsap.fromTo(bigTitle, { y: 100, opacity: 0, scale: 0.9 }, {
+          y: 0, opacity: 1, scale: 1, duration: 1.6, ease: 'expo.out',
           scrollTrigger: { trigger: bigTitle, start: 'top 92%', toggleActions: 'play none none none' },
         })
       }
@@ -45,7 +49,7 @@ export default function Contatti() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="contatti" className="relative bg-cream overflow-hidden">
+    <section ref={sectionRef} id="contatti" className="relative bg-cream overflow-hidden texture-lines">
 
       {/* Map — full bleed with GIANT overlapping title */}
       <div className="relative">

@@ -54,18 +54,20 @@ export default function Gallery() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Title — slide in from right with skew
       const bigTitle = sectionRef.current.querySelector('[data-gallery-title]')
       if (bigTitle) {
-        gsap.fromTo(bigTitle, { y: 100, opacity: 0 }, {
-          y: 0, opacity: 1, duration: 1.4, ease: 'expo.out',
+        gsap.fromTo(bigTitle, { x: 120, opacity: 0, skewX: -8 }, {
+          x: 0, opacity: 1, skewX: 0, duration: 1.6, ease: 'expo.out',
           scrollTrigger: { trigger: bigTitle, start: 'top 92%', toggleActions: 'play none none none' },
         })
       }
 
+      // Reveals with blur
       const els = sectionRef.current.querySelectorAll('[data-reveal]')
       els.forEach((el) => {
-        gsap.fromTo(el, { y: 40, opacity: 0 }, {
-          y: 0, opacity: 1, duration: 1, ease: 'power3.out',
+        gsap.fromTo(el, { y: 40, opacity: 0, filter: 'blur(6px)' }, {
+          y: 0, opacity: 1, filter: 'blur(0px)', duration: 1.1, ease: 'power3.out',
           scrollTrigger: { trigger: el, start: 'top 87%', toggleActions: 'play none none none' },
         })
       })
@@ -74,7 +76,7 @@ export default function Gallery() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="gallery" className="relative bg-navy overflow-hidden pt-20 md:pt-32 pb-16 md:pb-24">
+    <section ref={sectionRef} id="gallery" className="relative bg-navy overflow-hidden pt-20 md:pt-32 pb-16 md:pb-24 texture-diamonds">
 
       {/* GIANT overlapping title + filters */}
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 md:gap-8 mb-10 md:mb-14 px-4 sm:px-8 lg:px-12">

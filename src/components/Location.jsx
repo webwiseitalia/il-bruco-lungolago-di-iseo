@@ -19,41 +19,48 @@ export default function Location() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Hero image parallax + slight zoom
       gsap.to(heroImgRef.current, {
         yPercent: 15,
+        scale: 1.05,
         ease: 'none',
         scrollTrigger: { trigger: heroImgRef.current?.parentElement, start: 'top bottom', end: 'bottom top', scrub: 0.6 },
       })
 
+      // Reveal elements with blur
       const els = sectionRef.current.querySelectorAll('[data-reveal]')
       els.forEach((el) => {
-        gsap.fromTo(el, { y: 50, opacity: 0 }, {
-          y: 0, opacity: 1, duration: 1, ease: 'power3.out',
+        gsap.fromTo(el, { y: 50, opacity: 0, filter: 'blur(6px)' }, {
+          y: 0, opacity: 1, filter: 'blur(0px)', duration: 1.1, ease: 'power3.out',
           scrollTrigger: { trigger: el, start: 'top 87%', toggleActions: 'play none none none' },
         })
       })
 
+      // Space images — cinematic clip-path reveals with scale
       const spaceImgs = sectionRef.current.querySelectorAll('[data-space-img]')
       spaceImgs.forEach((img, i) => {
         const clipStart = i % 2 === 0 ? 'inset(0 100% 0 0)' : 'inset(0 0 0 100%)'
-        gsap.fromTo(img, { clipPath: clipStart }, {
-          clipPath: 'inset(0 0% 0 0%)', duration: 1.5, ease: 'expo.inOut',
+        gsap.fromTo(img, { clipPath: clipStart, scale: 1.08 }, {
+          clipPath: 'inset(0 0% 0 0%)', scale: 1, duration: 1.8, ease: 'expo.inOut',
           scrollTrigger: { trigger: img, start: 'top 82%', toggleActions: 'play none none none' },
         })
       })
 
+      // Title with dramatic skew entrance
       const bigText = sectionRef.current.querySelector('[data-location-title]')
       if (bigText) {
-        gsap.fromTo(bigText, { y: 80, opacity: 0 }, {
-          y: 0, opacity: 1, duration: 1.4, ease: 'expo.out',
+        gsap.fromTo(bigText, { y: 120, opacity: 0, skewY: 5 }, {
+          y: 0, opacity: 1, skewY: 0, duration: 1.6, ease: 'expo.out',
           scrollTrigger: { trigger: bigText, start: 'top 92%', toggleActions: 'play none none none' },
         })
       }
 
+      // Space texts — slide in with blur
       const spaceTexts = sectionRef.current.querySelectorAll('[data-space-text]')
-      spaceTexts.forEach((el) => {
-        gsap.fromTo(el, { y: 60, opacity: 0 }, {
-          y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 0.3,
+      spaceTexts.forEach((el, i) => {
+        const xDir = i % 2 === 0 ? -60 : 60
+        gsap.fromTo(el, { y: 50, x: xDir, opacity: 0, filter: 'blur(8px)' }, {
+          y: 0, x: 0, opacity: 1, filter: 'blur(0px)', duration: 1.2, ease: 'power3.out', delay: 0.2,
           scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
         })
       })
@@ -62,7 +69,7 @@ export default function Location() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="location" className="relative bg-white overflow-hidden">
+    <section ref={sectionRef} id="location" className="relative bg-white overflow-hidden texture-crosshatch">
 
       {/* HERO — full-bleed image with GIANT overlapping title */}
       <div className="relative h-[55vh] sm:h-[65vh] md:h-[75vh] overflow-hidden">
