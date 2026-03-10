@@ -37,6 +37,10 @@ export default function Navbar() {
             <img
               src={logo}
               alt="Il Bruco Lungolago Iseo"
+              title="Il Bruco — Ristorante sul Lungolago di Iseo"
+              loading="eager"
+              width={56}
+              height={56}
               className={`transition-all duration-500 ${scrolled ? 'h-10 md:h-12' : 'h-11 md:h-14'}`}
             />
           </a>

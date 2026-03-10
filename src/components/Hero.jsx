@@ -8,6 +8,10 @@ export default function Hero() {
         <img
           src={heroImg}
           alt="La veranda del Bruco affacciata sul Lago d'Iseo"
+          title="La veranda del ristorante Il Bruco con vista sul Lago d'Iseo"
+          loading="eager"
+          width={1920}
+          height={1080}
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70" />

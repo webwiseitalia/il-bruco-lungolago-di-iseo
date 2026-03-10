@@ -1,3 +1,4 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import ChiSiamo from './components/ChiSiamo'
@@ -10,10 +11,13 @@ import Gallery from './components/Gallery'
 import Contatti from './components/Contatti'
 import Footer from './components/Footer'
 import MobileBar from './components/MobileBar'
+import CookieBanner from './components/CookieBanner'
+import PrivacyPolicy from './pages/PrivacyPolicy'
+import CookiePolicy from './pages/CookiePolicy'
 
-export default function App() {
+function HomePage() {
   return (
-    <div className="min-h-screen">
+    <>
       <Navbar />
       <main>
         <Hero />
@@ -30,6 +34,21 @@ export default function App() {
       <MobileBar />
       {/* Spacer for mobile bottom bar */}
       <div className="h-14 lg:hidden" />
-    </div>
+    </>
+  )
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <div className="min-h-screen">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/cookie-policy" element={<CookiePolicy />} />
+        </Routes>
+        <CookieBanner />
+      </div>
+    </BrowserRouter>
   )
 }

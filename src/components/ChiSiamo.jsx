@@ -20,6 +20,10 @@ export default function ChiSiamo() {
               <img
                 src={verandaImg}
                 alt="La veranda del Bruco con vista lago"
+                title="Veranda panoramica del ristorante Il Bruco"
+                loading="lazy"
+                width={800}
+                height={500}
                 className="w-full h-80 sm:h-96 lg:h-[500px] object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-navy/30 to-transparent" />

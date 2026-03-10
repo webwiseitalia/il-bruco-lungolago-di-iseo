@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { Instagram, Facebook, Phone, MapPin, Clock } from 'lucide-react'
 import logo from '../assets/logo.webp'
 
@@ -140,6 +141,9 @@ export default function Footer() {
           </p>
           <div className="flex gap-4 text-xs text-gray-500">
             <span>P.IVA: [da inserire]</span>
+            <span>|</span>
+            <Link to="/privacy-policy" onClick={() => window.scrollTo(0, 0)} className="hover:text-teal-300 transition-colors">Privacy Policy</Link>
+            <Link to="/cookie-policy" onClick={() => window.scrollTo(0, 0)} className="hover:text-teal-300 transition-colors">Cookie Policy</Link>
           </div>
         </div>
       </div>
