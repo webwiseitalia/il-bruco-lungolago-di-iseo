@@ -10,17 +10,14 @@ export default function Eventi() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Background text scroll
-      const bgText = sectionRef.current.querySelector('[data-bg-text]')
-      if (bgText) {
-        gsap.to(bgText, {
-          xPercent: -40,
-          ease: 'none',
-          scrollTrigger: { trigger: sectionRef.current, start: 'top bottom', end: 'bottom top', scrub: 0.5 },
+      const bigTitle = sectionRef.current.querySelector('[data-events-title]')
+      if (bigTitle) {
+        gsap.fromTo(bigTitle, { y: 120, opacity: 0 }, {
+          y: 0, opacity: 1, duration: 1.6, ease: 'expo.out',
+          scrollTrigger: { trigger: bigTitle, start: 'top 95%', toggleActions: 'play none none none' },
         })
       }
 
-      // Cards — each with unique entrance
       const card1 = sectionRef.current.querySelector('[data-event-1]')
       const card2 = sectionRef.current.querySelector('[data-event-2]')
       const card3 = sectionRef.current.querySelector('[data-event-3]')
@@ -47,7 +44,6 @@ export default function Eventi() {
         )
       }
 
-      // Text reveals
       const els = sectionRef.current.querySelectorAll('[data-reveal]')
       els.forEach((el) => {
         gsap.fromTo(el, { y: 40, opacity: 0 }, {
@@ -61,34 +57,24 @@ export default function Eventi() {
 
   return (
     <section ref={sectionRef} id="eventi" className="relative bg-navy overflow-hidden">
-      {/* Background text — massive, bleeds */}
-      <div className="absolute top-1/2 -translate-y-1/2 left-0 overflow-hidden pointer-events-none select-none">
-        <div data-bg-text className="whitespace-nowrap font-display text-[10rem] sm:text-[18rem] md:text-[25rem] text-white/[0.02] font-bold leading-none">
-          Eventi &middot; Serate &middot; Eventi &middot; Serate
-        </div>
-      </div>
 
-      {/* Content — mixed padding, tight right */}
       <div className="relative z-10 pt-20 md:pt-32 pb-16 md:pb-24">
 
-        {/* Header — centered this time (different from all other sections) */}
-        <div className="text-center px-5 sm:px-10 mb-16 md:mb-24">
-          <span data-reveal className="font-mono text-[9px] tracking-[0.4em] uppercase text-teal-300">Vivi l'esperienza</span>
-          <h2 data-reveal className="font-display fluid-lg text-white font-bold mt-3 mx-auto">
-            Eventi &<br />Serate Speciali
+        {/* GIANT overlapping section title */}
+        <div data-events-title className="px-4 sm:px-8 lg:px-12 mb-6 md:mb-10">
+          <span data-reveal className="font-mono text-[9px] tracking-[0.4em] uppercase text-teal-300 block mb-4">Vivi l'esperienza</span>
+          <h2 className="font-display text-[14vw] sm:text-[11vw] lg:text-[8vw] font-bold leading-[0.82] tracking-[-0.04em]">
+            <span className="block text-white">Eventi &</span>
+            <span className="block text-teal-400/60 ml-[5vw]">Serate</span>
           </h2>
-          <div data-reveal className="w-20 h-0.5 bg-gold mt-4 mx-auto" />
-          <p data-reveal className="text-gray-400 text-sm sm:text-base max-w-md mx-auto mt-5 leading-relaxed">
-            Non solo ristorante: Il Bruco è il luogo dove nascono ricordi.
-          </p>
         </div>
 
-        {/* Events — OVERLAPPING SCATTERED cards, not a clean grid */}
+        {/* Events — cards with GIANT text overlapping the images */}
         <div className="relative px-4 sm:px-8 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-0">
 
-            {/* Paella — HUGE, spans 9 cols, pushed left */}
-            <div data-event-1 className="lg:col-span-9 group relative overflow-hidden">
+            {/* Paella — HUGE, with giant overlapping text */}
+            <div data-event-1 className="lg:col-span-9 group relative overflow-visible">
               <div className="relative h-[350px] sm:h-[450px] md:h-[600px] overflow-hidden">
                 <img
                   src={paellaImg}
@@ -101,17 +87,20 @@ export default function Eventi() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/30 to-transparent" />
                 <span className="absolute top-4 sm:top-6 left-4 sm:left-8 font-mono text-[9px] tracking-[0.25em] uppercase bg-gold text-white px-3 py-1.5">Signature</span>
-                <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-8 md:p-12">
-                  <h3 className="font-display text-3xl sm:text-4xl md:text-5xl text-white font-bold mb-3">Serate Paella & Sangria</h3>
-                  <p className="text-white/50 text-sm sm:text-base max-w-lg">
-                    Paella preparata al momento con frutti di mare freschi, sangria a volontà e musica dal vivo. Un'esperienza che sa di Mediterraneo.
-                  </p>
-                </div>
               </div>
+              {/* GIANT overlapping title */}
+              <div className="relative z-10 -mt-[6vw] sm:-mt-[5vw] pl-4 sm:pl-6 pointer-events-none">
+                <h3 className="font-display text-[8vw] sm:text-[6vw] lg:text-[4.5vw] text-white font-bold leading-[0.85] tracking-[-0.03em] drop-shadow-lg">
+                  Paella &<br /><span className="text-gold/80">Sangria</span>
+                </h3>
+              </div>
+              <p data-reveal className="text-white/40 text-sm max-w-lg mt-4 pl-4 sm:pl-6">
+                Paella preparata al momento con frutti di mare freschi, sangria a volontà e musica dal vivo. Un'esperienza che sa di Mediterraneo.
+              </p>
             </div>
 
-            {/* Musica dal Vivo — overlaps Paella, pushed up with negative margin */}
-            <div data-event-2 className="lg:col-span-5 lg:col-start-8 lg:-mt-40 relative z-10 group overflow-hidden">
+            {/* Musica dal Vivo — overlaps Paella */}
+            <div data-event-2 className="lg:col-span-5 lg:col-start-8 lg:-mt-40 relative z-10 group overflow-visible">
               <div className="relative h-[250px] sm:h-[300px] md:h-[350px] overflow-hidden">
                 <img
                   src={verandaImg}
@@ -123,15 +112,16 @@ export default function Eventi() {
                   className="w-full h-full object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/40 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
-                  <h3 className="font-display text-xl sm:text-2xl text-white font-bold mb-1">Musica dal Vivo</h3>
-                  <p className="text-white/50 text-xs sm:text-sm">Serate con musica live sulla veranda vista lago.</p>
-                </div>
+              </div>
+              {/* Overlapping title */}
+              <div className="relative z-10 -mt-8 sm:-mt-12 pl-4 sm:pl-5">
+                <h3 className="font-display text-3xl sm:text-4xl md:text-5xl text-white font-bold leading-[0.85] drop-shadow-lg">Musica<br />dal Vivo</h3>
+                <p className="text-white/40 text-xs sm:text-sm mt-3">Serate con musica live sulla veranda vista lago.</p>
               </div>
             </div>
 
-            {/* Eventi Privati — offset left, different row, vertical gap */}
-            <div data-event-3 className="lg:col-span-6 lg:col-start-2 lg:mt-6 group relative overflow-hidden">
+            {/* Eventi Privati */}
+            <div data-event-3 className="lg:col-span-6 lg:col-start-2 lg:mt-10 group relative overflow-visible">
               <div className="relative h-[250px] sm:h-[300px] md:h-[350px] overflow-hidden">
                 <img
                   src={eventiImg}
@@ -143,16 +133,16 @@ export default function Eventi() {
                   className="w-full h-full object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/40 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
-                  <h3 className="font-display text-xl sm:text-2xl text-white font-bold mb-1">Eventi Privati</h3>
-                  <p className="text-white/50 text-xs sm:text-sm">Compleanni, anniversari, cene aziendali e occasioni speciali.</p>
-                </div>
+              </div>
+              <div className="relative z-10 -mt-8 sm:-mt-10 pl-4 sm:pl-5">
+                <h3 className="font-display text-3xl sm:text-4xl text-white font-bold leading-[0.85] drop-shadow-lg">Eventi Privati</h3>
+                <p className="text-white/40 text-xs sm:text-sm mt-3">Compleanni, anniversari, cene aziendali e occasioni speciali.</p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* CTAs — far right this time */}
+        {/* CTAs */}
         <div className="mt-12 md:mt-20 px-4 sm:px-8 lg:px-12 flex flex-col sm:flex-row items-start sm:items-center sm:justify-end gap-4">
           <a
             href="https://booking.ilbruco.it"

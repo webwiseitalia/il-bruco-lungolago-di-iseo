@@ -54,6 +54,14 @@ export default function Gallery() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      const bigTitle = sectionRef.current.querySelector('[data-gallery-title]')
+      if (bigTitle) {
+        gsap.fromTo(bigTitle, { y: 100, opacity: 0 }, {
+          y: 0, opacity: 1, duration: 1.4, ease: 'expo.out',
+          scrollTrigger: { trigger: bigTitle, start: 'top 92%', toggleActions: 'play none none none' },
+        })
+      }
+
       const els = sectionRef.current.querySelectorAll('[data-reveal]')
       els.forEach((el) => {
         gsap.fromTo(el, { y: 40, opacity: 0 }, {
@@ -67,12 +75,14 @@ export default function Gallery() {
 
   return (
     <section ref={sectionRef} id="gallery" className="relative bg-navy overflow-hidden pt-20 md:pt-32 pb-16 md:pb-24">
-      {/* Header — tight left, filters pushed far right. Unique layout. */}
-      <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 md:gap-8 mb-10 md:mb-14 pl-4 sm:pl-8 lg:pl-12 pr-4 sm:pr-8 lg:pr-12">
-        <div>
-          <span data-reveal className="font-mono text-[9px] tracking-[0.4em] uppercase text-teal-300">Le nostre foto</span>
-          <h2 data-reveal className="font-display fluid-lg text-white font-bold mt-3">Gallery</h2>
-          <div data-reveal className="w-20 h-0.5 bg-gold mt-3" />
+
+      {/* GIANT overlapping title + filters */}
+      <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 md:gap-8 mb-10 md:mb-14 px-4 sm:px-8 lg:px-12">
+        <div data-gallery-title>
+          <h2 className="font-display text-[14vw] sm:text-[11vw] lg:text-[8vw] font-bold leading-[0.82] tracking-[-0.04em]">
+            <span className="block text-white">Gal</span>
+            <span className="block text-teal-400/50 ml-[6vw]">lery</span>
+          </h2>
         </div>
 
         <div data-reveal className="flex flex-wrap gap-2">
@@ -92,7 +102,7 @@ export default function Gallery() {
         </div>
       </div>
 
-      {/* Gallery — masonry, FULL BLEED (no side padding) */}
+      {/* Gallery masonry */}
       <div className="columns-2 md:columns-3 lg:columns-4 gap-2 md:gap-3 space-y-2 md:space-y-3 px-2 md:px-3">
         <AnimatePresence mode="popLayout">
           {filtered.map((img) => (
@@ -125,7 +135,7 @@ export default function Gallery() {
         </AnimatePresence>
       </div>
 
-      {/* Instagram CTA — right-aligned (different from other CTAs) */}
+      {/* Instagram CTA */}
       <div className="mt-12 md:mt-16 flex justify-end pr-4 sm:pr-8 lg:pr-12">
         <a
           href="https://www.instagram.com/ilbrucoiseo"

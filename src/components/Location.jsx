@@ -19,14 +19,12 @@ export default function Location() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Hero image parallax
       gsap.to(heroImgRef.current, {
         yPercent: 15,
         ease: 'none',
         scrollTrigger: { trigger: heroImgRef.current?.parentElement, start: 'top bottom', end: 'bottom top', scrub: 0.6 },
       })
 
-      // Text reveals
       const els = sectionRef.current.querySelectorAll('[data-reveal]')
       els.forEach((el) => {
         gsap.fromTo(el, { y: 50, opacity: 0 }, {
@@ -35,7 +33,6 @@ export default function Location() {
         })
       })
 
-      // Space images — clip-path reveals, alternating directions
       const spaceImgs = sectionRef.current.querySelectorAll('[data-space-img]')
       spaceImgs.forEach((img, i) => {
         const clipStart = i % 2 === 0 ? 'inset(0 100% 0 0)' : 'inset(0 0 0 100%)'
@@ -45,9 +42,16 @@ export default function Location() {
         })
       })
 
-      // Space text blocks
+      const bigText = sectionRef.current.querySelector('[data-location-title]')
+      if (bigText) {
+        gsap.fromTo(bigText, { y: 80, opacity: 0 }, {
+          y: 0, opacity: 1, duration: 1.4, ease: 'expo.out',
+          scrollTrigger: { trigger: bigText, start: 'top 92%', toggleActions: 'play none none none' },
+        })
+      }
+
       const spaceTexts = sectionRef.current.querySelectorAll('[data-space-text]')
-      spaceTexts.forEach((el, i) => {
+      spaceTexts.forEach((el) => {
         gsap.fromTo(el, { y: 60, opacity: 0 }, {
           y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 0.3,
           scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
@@ -60,7 +64,7 @@ export default function Location() {
   return (
     <section ref={sectionRef} id="location" className="relative bg-white overflow-hidden">
 
-      {/* HERO — full-bleed image, diagonal bottom clip */}
+      {/* HERO — full-bleed image with GIANT overlapping title */}
       <div className="relative h-[55vh] sm:h-[65vh] md:h-[75vh] overflow-hidden">
         <img
           ref={heroImgRef}
@@ -74,36 +78,32 @@ export default function Location() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/20 to-transparent" />
 
-        {/* Text overlay — bottom-left, tight to edge */}
-        <div className="absolute bottom-0 left-0 right-0 pl-4 sm:pl-8 lg:pl-12 pr-5 sm:pr-10 pb-8 sm:pb-12 md:pb-16">
+        {/* Small info overlay */}
+        <div className="absolute top-4 left-4 sm:top-8 sm:left-8 lg:left-12 z-10">
           <div data-reveal className="flex items-center gap-2 text-teal-300 mb-2">
             <MapPin className="w-3.5 h-3.5" />
-            <span className="font-mono text-[9px] tracking-[0.25em] uppercase">Via Lungolago Marconi 20/A — Iseo</span>
+            <span className="font-mono text-[9px] tracking-[0.25em] uppercase">Via Lungolago Marconi 20/A</span>
           </div>
-          <h2 data-reveal className="font-display fluid-md text-white font-bold max-w-2xl leading-tight">
-            A metà passeggiata sul lungolago
-          </h2>
         </div>
 
-        {/* Counter — absolute top-right, overlapping */}
+        {/* Counter */}
         <div className="absolute top-4 right-4 sm:top-8 sm:right-8 lg:right-14 text-right">
           <div className="font-display text-5xl sm:text-7xl text-white/15 font-bold">280+</div>
           <div className="font-mono text-[8px] tracking-[0.2em] uppercase text-white/25">Posti a sedere</div>
         </div>
       </div>
 
-      {/* Section title — overlaps image with negative margin, left-aligned */}
-      <div className="relative z-10 -mt-6 sm:-mt-10 pl-4 sm:pl-8 lg:pl-12 mb-16 md:mb-24">
-        <div className="bg-cream inline-block px-6 sm:px-10 py-4 sm:py-6">
-          <span data-reveal className="font-mono text-[9px] tracking-[0.4em] uppercase text-teal-500 block">I nostri spazi</span>
-          <h3 data-reveal className="font-display fluid-lg text-navy font-bold mt-2">La Location</h3>
-          <div data-reveal className="w-20 h-0.5 bg-gold mt-3" />
-        </div>
+      {/* GIANT overlapping title — bleeds UP into the hero image */}
+      <div data-location-title className="relative z-10 -mt-[10vw] sm:-mt-[8vw] lg:-mt-[7vw] px-4 sm:px-8 lg:px-12 pointer-events-none mb-16 md:mb-24">
+        <h2 className="font-display text-[15vw] sm:text-[12vw] lg:text-[9vw] font-bold leading-[0.85] tracking-[-0.04em]">
+          <span className="block text-white drop-shadow-lg">La</span>
+          <span className="block text-navy ml-[10vw]">Location</span>
+        </h2>
       </div>
 
-      {/* SPACES — each with completely different layout */}
+      {/* SPACES */}
 
-      {/* Space 1 — Image left (70%), text overlapping on right with background */}
+      {/* Space 1 — Image left, text overlapping right */}
       <div className="relative mb-4 md:mb-0">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 items-end">
           <div className="lg:col-span-8">
@@ -112,6 +112,7 @@ export default function Location() {
             </div>
           </div>
           <div data-space-text className="lg:col-span-5 lg:-ml-20 relative z-10 bg-cream px-5 sm:px-8 lg:px-10 py-8 sm:py-10 lg:py-14">
+            <div className="font-display text-[3rem] sm:text-[4rem] font-bold leading-[0.85] tracking-[-0.03em] text-navy/8 mb-4">01</div>
             <div className="font-mono text-[9px] tracking-[0.2em] uppercase text-navy/30 mb-2">{spaces[0].seats} posti</div>
             <h4 className="font-display text-2xl sm:text-3xl text-navy font-bold mb-3">{spaces[0].title}</h4>
             <p className="text-gray-500 text-sm leading-relaxed mb-5">{spaces[0].desc}</p>
@@ -124,10 +125,11 @@ export default function Location() {
         </div>
       </div>
 
-      {/* Space 2 — Text left (narrow), Image right (bleeds), reversed rhythm */}
+      {/* Space 2 — Text left, Image right, GIANT number overlapping */}
       <div className="relative mb-4 md:mb-0">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 items-center">
           <div data-space-text className="lg:col-span-4 lg:col-start-1 px-5 sm:px-8 lg:pl-12 lg:pr-0 py-8 sm:py-10 lg:py-20 order-2 lg:order-1">
+            <div className="font-display text-[3rem] sm:text-[4rem] font-bold leading-[0.85] tracking-[-0.03em] text-navy/8 mb-4">02</div>
             <div className="font-mono text-[9px] tracking-[0.2em] uppercase text-navy/30 mb-2">{spaces[1].seats} posti</div>
             <h4 className="font-display text-2xl sm:text-3xl text-navy font-bold mb-3">{spaces[1].title}</h4>
             <p className="text-gray-500 text-sm leading-relaxed mb-5">{spaces[1].desc}</p>
@@ -137,20 +139,25 @@ export default function Location() {
               ))}
             </div>
           </div>
-          <div className="lg:col-span-8 lg:col-start-5 order-1 lg:order-2">
+          <div className="lg:col-span-8 lg:col-start-5 order-1 lg:order-2 relative">
             <div data-space-img className="relative overflow-hidden h-[300px] sm:h-[380px] md:h-[450px]">
               <img src={spaces[1].img} alt={spaces[1].alt} title={spaces[1].title} loading="lazy" width={800} height={450} className="w-full h-full object-cover" />
+            </div>
+            {/* Giant overlapping text on image */}
+            <div className="absolute -bottom-6 sm:-bottom-10 right-4 sm:right-8 pointer-events-none select-none z-10">
+              <span className="font-display text-[5rem] sm:text-[7rem] md:text-[9rem] font-bold leading-none tracking-[-0.04em] text-navy/5">Sala</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Space 3 — Full-width with text overlay, different from both above */}
+      {/* Space 3 — Full-width with text overlay */}
       <div className="relative">
         <div data-space-img className="relative overflow-hidden h-[350px] sm:h-[450px] md:h-[550px]">
           <img src={spaces[2].img} alt={spaces[2].alt} title={spaces[2].title} loading="lazy" width={1200} height={550} className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-navy/80 via-navy/40 to-transparent" />
           <div data-space-text className="absolute bottom-0 left-0 pl-4 sm:pl-8 lg:pl-12 pb-8 sm:pb-12 max-w-md">
+            <div className="font-display text-[3rem] sm:text-[4rem] font-bold leading-[0.85] tracking-[-0.03em] text-white/10 mb-4">03</div>
             <div className="font-mono text-[9px] tracking-[0.2em] uppercase text-white/40 mb-2">{spaces[2].seats} posti</div>
             <h4 className="font-display text-2xl sm:text-3xl text-white font-bold mb-3">{spaces[2].title}</h4>
             <p className="text-white/60 text-sm leading-relaxed mb-5">{spaces[2].desc}</p>

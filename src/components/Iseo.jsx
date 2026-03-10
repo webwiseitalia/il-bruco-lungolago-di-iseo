@@ -17,14 +17,20 @@ export default function Iseo() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Image parallax
       gsap.to(imgRef.current, {
         yPercent: -15,
         ease: 'none',
         scrollTrigger: { trigger: imgRef.current?.parentElement, start: 'top bottom', end: 'bottom top', scrub: 0.6 },
       })
 
-      // Reveal elements
+      const bigTitle = sectionRef.current.querySelector('[data-iseo-title]')
+      if (bigTitle) {
+        gsap.fromTo(bigTitle, { y: 100, opacity: 0 }, {
+          y: 0, opacity: 1, duration: 1.4, ease: 'expo.out',
+          scrollTrigger: { trigger: bigTitle, start: 'top 92%', toggleActions: 'play none none none' },
+        })
+      }
+
       const els = sectionRef.current.querySelectorAll('[data-reveal]')
       els.forEach((el) => {
         gsap.fromTo(el, { y: 50, opacity: 0 }, {
@@ -33,7 +39,6 @@ export default function Iseo() {
         })
       })
 
-      // Attractions — stagger in from right
       const items = sectionRef.current.querySelectorAll('[data-attraction]')
       items.forEach((item, i) => {
         gsap.fromTo(item,
@@ -51,10 +56,9 @@ export default function Iseo() {
 
   return (
     <section ref={sectionRef} className="relative bg-cream overflow-hidden">
-      {/* Completely different from Location — image right bleeds, text left with wide margin */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
 
-        {/* Image — RIGHT side, bleeds off-screen, comes first in DOM for mobile */}
+        {/* Image — RIGHT side with GIANT overlapping text */}
         <div className="lg:col-span-7 lg:col-start-6 lg:order-2 relative">
           <div className="relative overflow-hidden h-[45vh] sm:h-[55vh] lg:h-[90vh]">
             <img
@@ -69,22 +73,27 @@ export default function Iseo() {
             />
           </div>
 
-          {/* Floating distance tags — overlapping bottom-left of image */}
-          <div data-reveal className="absolute bottom-4 sm:bottom-8 left-4 sm:left-8 lg:-left-20 z-10 flex flex-col gap-2">
+          {/* GIANT overlapping title on the image */}
+          <div data-iseo-title className="absolute bottom-0 left-0 right-0 lg:-left-[30%] z-20 pointer-events-none select-none pb-4 sm:pb-8">
+            <h2 className="font-display text-[18vw] sm:text-[14vw] lg:text-[11vw] font-bold leading-[0.82] tracking-[-0.05em]">
+              <span className="block text-white/90 drop-shadow-lg pl-4 sm:pl-8 lg:pl-0">Iseo</span>
+              <span className="block text-navy/80 text-[0.5em] ml-[10vw] sm:ml-[15vw] lg:ml-[8vw]">& il Lago</span>
+            </h2>
+          </div>
+
+          {/* Distance tags */}
+          <div data-reveal className="absolute top-4 sm:top-8 right-4 sm:right-8 z-10 flex flex-col gap-2">
             <span className="font-mono text-[8px] tracking-[0.15em] uppercase text-white bg-navy/80 backdrop-blur-sm px-4 py-2 inline-block">Brescia ~25 min</span>
-            <span className="font-mono text-[8px] tracking-[0.15em] uppercase text-white bg-navy/80 backdrop-blur-sm px-4 py-2 inline-block ml-4">Bergamo ~30 min</span>
-            <span className="font-mono text-[8px] tracking-[0.15em] uppercase text-white bg-navy/80 backdrop-blur-sm px-4 py-2 inline-block ml-8">Milano ~1h15</span>
+            <span className="font-mono text-[8px] tracking-[0.15em] uppercase text-white bg-navy/80 backdrop-blur-sm px-4 py-2 inline-block">Bergamo ~30 min</span>
+            <span className="font-mono text-[8px] tracking-[0.15em] uppercase text-white bg-navy/80 backdrop-blur-sm px-4 py-2 inline-block">Milano ~1h15</span>
           </div>
         </div>
 
-        {/* Text — LEFT side, generous padding, pushed down */}
+        {/* Text — LEFT side */}
         <div className="lg:col-span-5 lg:col-start-1 lg:order-1 px-5 sm:px-8 lg:pl-12 lg:pr-0 py-12 sm:py-16 lg:py-0 lg:flex lg:flex-col lg:justify-center">
           <div className="lg:pr-8 lg:py-20">
             <span data-reveal className="font-mono text-[9px] tracking-[0.4em] uppercase text-teal-500">Scopri il territorio</span>
-            <h2 data-reveal className="font-display fluid-lg text-navy font-bold mt-3 mb-2">
-              Iseo e<br />il Lago
-            </h2>
-            <div data-reveal className="w-20 h-0.5 bg-gold mb-8" />
+            <div data-reveal className="w-20 h-0.5 bg-gold mb-8 mt-4" />
 
             <p data-reveal className="text-base sm:text-lg leading-relaxed text-gray-600 mb-5">
               Iseo è la meta turistica principale del Lago d'Iseo, adagiata tra il lago, le colline della
@@ -95,7 +104,6 @@ export default function Iseo() {
               una cena romantica vista lago o un pranzo di gruppo.
             </p>
 
-            {/* Attractions — horizontal cards, not a vertical list */}
             <div className="grid grid-cols-2 gap-3 sm:gap-4">
               {attractions.map((a) => (
                 <div key={a.title} data-attraction className="border border-navy/8 p-4 sm:p-5 hover:border-teal-300 transition-colors duration-500">

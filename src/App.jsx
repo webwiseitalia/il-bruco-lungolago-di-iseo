@@ -71,6 +71,7 @@ function HomePage() {
   )
 }
 
+// Il Bruco — Lungolago di Iseo
 export default function App() {
   return (
     <BrowserRouter>

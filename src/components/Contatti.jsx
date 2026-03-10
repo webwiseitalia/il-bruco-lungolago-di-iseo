@@ -25,12 +25,19 @@ export default function Contatti() {
         })
       })
 
-      // Map clip-path reveal
       const map = sectionRef.current.querySelector('[data-map]')
       if (map) {
         gsap.fromTo(map, { clipPath: 'inset(0 0 0 100%)' }, {
           clipPath: 'inset(0 0 0 0%)', duration: 1.6, ease: 'expo.inOut',
           scrollTrigger: { trigger: map, start: 'top 80%', toggleActions: 'play none none none' },
+        })
+      }
+
+      const bigTitle = sectionRef.current.querySelector('[data-contatti-title]')
+      if (bigTitle) {
+        gsap.fromTo(bigTitle, { y: 80, opacity: 0 }, {
+          y: 0, opacity: 1, duration: 1.4, ease: 'expo.out',
+          scrollTrigger: { trigger: bigTitle, start: 'top 92%', toggleActions: 'play none none none' },
         })
       }
     }, sectionRef)
@@ -39,31 +46,37 @@ export default function Contatti() {
 
   return (
     <section ref={sectionRef} id="contatti" className="relative bg-cream overflow-hidden">
-      {/* COMPLETELY different structure: Map on top (full-bleed), info below overlapping */}
 
-      {/* Map — full bleed, tall */}
-      <div data-map className="relative h-[40vh] sm:h-[50vh] md:h-[55vh] overflow-hidden">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2788.5!2d10.0541!3d45.6608!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478177a41faa9d43%3A0x5ee8a2df79c9f402!2sIl%20Bruco!5e0!3m2!1sit!2sit!4v1700000000000!5m2!1sit!2sit"
-          width="100%"
-          height="100%"
-          style={{ border: 0, filter: 'grayscale(0.3) contrast(1.1)' }}
-          allowFullScreen=""
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          title="Mappa Il Bruco - Lungolago di Iseo"
-        />
+      {/* Map — full bleed with GIANT overlapping title */}
+      <div className="relative">
+        <div data-map className="relative h-[40vh] sm:h-[50vh] md:h-[55vh] overflow-hidden">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2788.5!2d10.0541!3d45.6608!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478177a41faa9d43%3A0x5ee8a2df79c9f402!2sIl%20Bruco!5e0!3m2!1sit!2sit!4v1700000000000!5m2!1sit!2sit"
+            width="100%"
+            height="100%"
+            style={{ border: 0, filter: 'grayscale(0.3) contrast(1.1)' }}
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Mappa Il Bruco - Lungolago di Iseo"
+          />
+        </div>
+
+        {/* GIANT overlapping title */}
+        <div data-contatti-title className="relative z-10 -mt-[8vw] sm:-mt-[7vw] lg:-mt-[6vw] px-4 sm:px-8 lg:px-12 pointer-events-none">
+          <h2 className="font-display text-[14vw] sm:text-[11vw] lg:text-[8vw] font-bold leading-[0.82] tracking-[-0.04em]">
+            <span className="block text-navy drop-shadow-lg">Contatti</span>
+            <span className="block text-teal-500/50 text-[0.5em] ml-[10vw]">& Prenota</span>
+          </h2>
+        </div>
       </div>
 
-      {/* Content block — overlaps map with negative margin */}
-      <div className="relative z-10 -mt-16 sm:-mt-20 md:-mt-28 px-4 sm:px-8 lg:px-12 pb-16 md:pb-24">
+      {/* Content block */}
+      <div className="relative z-10 px-4 sm:px-8 lg:px-12 pt-8 sm:pt-12 pb-16 md:pb-24">
 
-        {/* Booking CTA — wide teal block overlapping the map */}
+        {/* Booking CTA */}
         <div data-reveal className="bg-teal-500 p-6 sm:p-8 md:p-12 text-white mb-10 md:mb-16 max-w-2xl">
           <span className="font-mono text-[9px] tracking-[0.4em] uppercase text-teal-100/60 block mb-3">Vieni a trovarci</span>
-          <h2 className="font-display fluid-md text-white font-bold mb-2">
-            Prenota &<br />Contatti
-          </h2>
           <div className="w-16 h-0.5 bg-white/30 mb-5" />
           <p className="text-teal-100 text-sm sm:text-base mb-7 leading-relaxed max-w-md">
             Usa il nostro sistema online per assicurarti il tavolo migliore, soprattutto nei weekend.
@@ -89,7 +102,7 @@ export default function Contatti() {
           </div>
         </div>
 
-        {/* Contact details — scattered horizontal layout, not a vertical list */}
+        {/* Contact details */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-10">
           <div data-reveal className="flex gap-3 items-start">
             <MapPin className="w-4 h-4 text-teal-500 mt-0.5 shrink-0" />
@@ -127,7 +140,7 @@ export default function Contatti() {
           </div>
         </div>
 
-        {/* Services — scattered tags */}
+        {/* Services */}
         <div data-reveal>
           <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-navy/25 mb-3">Servizi</div>
           <div className="flex flex-wrap gap-2">
